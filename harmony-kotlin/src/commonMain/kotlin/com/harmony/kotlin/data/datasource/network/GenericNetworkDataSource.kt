@@ -9,8 +9,6 @@ import com.harmony.kotlin.data.query.Query
 import com.harmony.kotlin.error.QueryNotSupportedException
 import io.ktor.client.HttpClient
 import io.ktor.client.statement.HttpResponse
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 
 class GetNetworkDataSource<T>(
@@ -20,24 +18,6 @@ class GetNetworkDataSource<T>(
   private val globalHeaders: List<Pair<String, String>> = emptyList(),
   private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
 ) : GetDataSource<T> {
-
-  @Deprecated("Use the constructor with NetworkResponseDecoder instead")
-  constructor(
-    url: String,
-    httpClient: HttpClient,
-    serializer: KSerializer<T>,
-    json: Json,
-    globalHeaders: List<Pair<String, String>> = emptyList(),
-    exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
-  ) : this(
-    url, httpClient,
-    if (serializer.descriptor == Unit.serializer().descriptor) {
-      IgnoreNetworkResponseDecoderOfAnyType<T>()
-    } else {
-      SerializedNetworkResponseDecoder<T>(json, serializer)
-    },
-    globalHeaders, exceptionMapper
-  )
 
   /**
    * GET request returning an object
@@ -70,24 +50,6 @@ class PutNetworkDataSource<T>(
   private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
 
 ) : PutDataSource<T> {
-
-  @Deprecated("Use the constructor with NetworkResponseDecoder instead")
-  constructor(
-    url: String,
-    httpClient: HttpClient,
-    serializer: KSerializer<T>,
-    json: Json,
-    globalHeaders: List<Pair<String, String>> = emptyList(),
-    exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
-  ) : this(
-    url, httpClient,
-    if (serializer.descriptor == Unit.serializer().descriptor) {
-      IgnoreNetworkResponseDecoderOfAnyType<T>()
-    } else {
-      SerializedNetworkResponseDecoder<T>(json, serializer)
-    },
-    globalHeaders, exceptionMapper
-  )
 
   /**
    * POST or PUT request returning an object

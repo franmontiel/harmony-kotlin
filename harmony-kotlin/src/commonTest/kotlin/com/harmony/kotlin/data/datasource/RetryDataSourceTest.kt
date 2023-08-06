@@ -36,7 +36,7 @@ class RetryDataSourceTest : BaseTest() {
     var exception: IllegalStateException? = null
 
     try {
-      RetryDataSource(
+      DataSourceRetrier(
         getDataSource, VoidDataSource(), VoidDataSource<Unit>(),
         maxAmountOfExecutions = randomInt(max = 0)
       )
@@ -55,9 +55,9 @@ class RetryDataSourceTest : BaseTest() {
       callCounter++
       expectedResponse
     }
-    val retryDataSource = RetryDataSource(getDataSource, VoidDataSource(), VoidDataSource<Unit>(), maxAmountOfExecutions = ANY_ITEMS_COUNT)
+    val dataSourceRetrier = DataSourceRetrier(getDataSource, VoidDataSource(), VoidDataSource<Unit>(), maxAmountOfExecutions = ANY_ITEMS_COUNT)
 
-    val actualResult = retryDataSource.get(VoidQuery)
+    val actualResult = dataSourceRetrier.get(VoidQuery)
 
     assertEquals(actualResult, expectedResponse)
     assertEquals(1, callCounter)
@@ -72,9 +72,9 @@ class RetryDataSourceTest : BaseTest() {
       if (callCounter == 1) throw DataNotFoundException()
       else expectedResponse
     }
-    val retryDataSource = RetryDataSource(getDataSource, VoidDataSource(), VoidDataSource<Unit>(), maxAmountOfExecutions = ANY_ITEMS_COUNT)
+    val dataSourceRetrier = DataSourceRetrier(getDataSource, VoidDataSource(), VoidDataSource<Unit>(), maxAmountOfExecutions = ANY_ITEMS_COUNT)
 
-    val actualResult = retryDataSource.get(VoidQuery)
+    val actualResult = dataSourceRetrier.get(VoidQuery)
 
     assertEquals(actualResult, expectedResponse)
     assertEquals(2, callCounter)
@@ -84,7 +84,7 @@ class RetryDataSourceTest : BaseTest() {
   fun `should fail when all retries failed`() = runTest {
     val dataException = DataNotFoundException("dummy error")
     mocker.everySuspending { putDataSource.put(isAny(), isAny()) } runs { throw dataException }
-    val retryDataSource = RetryDataSource(
+    val dataSourceRetrier = DataSourceRetrier(
       VoidDataSource(),
       putDataSource,
       VoidDataSource<Unit>(),
@@ -94,7 +94,7 @@ class RetryDataSourceTest : BaseTest() {
     var catchException: Exception? = null
 
     try {
-      retryDataSource.put(VoidQuery, randomNullable { randomString() })
+      dataSourceRetrier.put(VoidQuery, randomNullable { randomString() })
     } catch (e: Exception) {
       catchException = e
     }
@@ -113,7 +113,7 @@ class RetryDataSourceTest : BaseTest() {
       if (callCounter == 1) throw AnyException("first exception")
       else throw dataException
     }
-    val retryDataSource = RetryDataSource<String>(
+    val dataSourceRetrier = DataSourceRetrier<String>(
       VoidDataSource(), VoidDataSource(),
       deleteDataSource,
       maxAmountOfExecutions = Int.MAX_VALUE,
@@ -122,7 +122,7 @@ class RetryDataSourceTest : BaseTest() {
     )
 
     val catchException = assertFailsWith<DataNotFoundException> {
-      retryDataSource.delete(VoidQuery)
+      dataSourceRetrier.delete(VoidQuery)
     }
     assertEquals(catchException, dataException)
     assertEquals(2, callCounter)

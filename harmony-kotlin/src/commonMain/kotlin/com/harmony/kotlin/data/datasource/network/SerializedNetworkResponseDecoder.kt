@@ -9,9 +9,7 @@ import kotlinx.serialization.StringFormat
  * @param stringFormat [StringFormat] - the format from which the data is decoded. Json, XML, etc.
  * @param serializer [KSerializer] - serializer that is used to decode the data.
  */
-expect class SerializedNetworkResponseDecoder<T> (stringFormat: StringFormat, serializer: KSerializer<T>) : NetworkResponseDecoder<T> {
+expect class SerializedNetworkResponseDecoder<T>(stringFormat: StringFormat, serializer: KSerializer<T>) : NetworkResponseDecoder<T> {
 
   override suspend fun decode(httpResponse: HttpResponse): T
-
-  override suspend fun decodeList(httpResponse: HttpResponse): List<T>
 }

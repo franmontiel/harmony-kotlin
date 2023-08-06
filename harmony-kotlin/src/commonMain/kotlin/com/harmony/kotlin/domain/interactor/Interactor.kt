@@ -2,7 +2,6 @@ package com.harmony.kotlin.domain.interactor
 
 import com.harmony.kotlin.data.operation.DefaultOperation
 import com.harmony.kotlin.data.operation.Operation
-import com.harmony.kotlin.data.query.IdQuery
 import com.harmony.kotlin.data.query.Query
 import com.harmony.kotlin.data.query.VoidQuery
 import com.harmony.kotlin.data.repository.DeleteRepository
@@ -34,12 +33,6 @@ class DeleteInteractor(private val coroutineContext: CoroutineContext, private v
       deleteRepository.delete(query, operation)
     }
 }
-
-suspend fun <K, V> GetInteractor<V>.execute(id: K, operation: Operation = DefaultOperation): V = this.invoke(IdQuery(id), operation)
-
-suspend fun <K, V> PutInteractor<V>.execute(id: K, value: V?, operation: Operation = DefaultOperation): V = this.invoke(value, IdQuery(id), operation)
-
-suspend fun <K> DeleteInteractor.execute(id: K, operation: Operation = DefaultOperation) = this.invoke(IdQuery(id), operation)
 
 fun <V> GetRepository<V>.toGetInteractor(coroutineContext: CoroutineContext) = GetInteractor(coroutineContext, this)
 

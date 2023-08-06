@@ -10,9 +10,4 @@ abstract class NetworkResponseDecoder<T> {
    * Decodes a [HttpResponse] into a [T] object.
    */
   internal abstract suspend fun decode(httpResponse: HttpResponse): T
-
-  /**
-   * Decodes a [HttpResponse] into a [List] of [T] objects.
-   */
-  internal abstract suspend fun decodeList(httpResponse: HttpResponse): List<T>
 }
