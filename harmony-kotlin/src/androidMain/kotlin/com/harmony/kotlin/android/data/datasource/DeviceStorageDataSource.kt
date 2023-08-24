@@ -43,15 +43,15 @@ class DeviceStorageDataSource<T>(
             is Set<*> -> {
               (value as? Set<String>)?.let { castedValue ->
                 editor.putStringSet(key, castedValue).apply()
-              } ?: throw UnsupportedOperationException("value type is not supported")
+              } ?: throw IllegalArgumentException("value type is not supported")
             }
             else -> {
-              throw UnsupportedOperationException("value type is not supported")
+              throw IllegalArgumentException("value type is not supported")
             }
           }
 
           return@let it
-        } ?: throw IllegalArgumentException("${DeviceStorageDataSource::class.java.simpleName}: value must be not null")
+        } ?: throw IllegalArgumentException("value must be not null")
       }
       else -> notSupportedQuery()
     }

@@ -27,7 +27,6 @@ import io.ktor.http.content.TextContent
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.util.flattenEntries
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import org.kodein.mock.Mocker
 import org.kodein.mock.UsesMocks
@@ -201,7 +200,7 @@ class PutNetworkDataSourceTest : BaseTest() {
       pathUrl
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), Unit.serializer(), Json, emptyList()
+      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder(), emptyList()
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
@@ -245,7 +244,7 @@ class PutNetworkDataSourceTest : BaseTest() {
       pathUrl
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), Unit.serializer(), Json, emptyList()
+      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder(), emptyList()
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)

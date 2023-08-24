@@ -1,6 +1,5 @@
 package com.harmony.kotlin.library.oauth
 
-import com.harmony.kotlin.common.Platform
 import com.harmony.kotlin.common.logger.KtorHarmonyLogger
 import com.harmony.kotlin.data.datasource.DataSourceMapper
 import com.harmony.kotlin.data.datasource.network.DefaultUnauthorizedResolution
@@ -107,12 +106,11 @@ class OAuthDefaultModule(
           }
         )
       }
-      if (Platform.IS_JVM) {
-        install(Logging) {
-          logger = KtorHarmonyLogger(moduleLogger)
-          level = LogLevel.ALL
-        }
+      install(Logging) {
+        logger = KtorHarmonyLogger(moduleLogger)
+        level = LogLevel.HEADERS
       }
+
       configureExceptionErrorMapping(resolution)
       expectSuccess = false
     }

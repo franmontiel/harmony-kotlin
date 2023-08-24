@@ -3,7 +3,7 @@ package com.harmony.kotlin.data.datasource
 import com.harmony.kotlin.common.logger.Logger
 import com.harmony.kotlin.data.query.Query
 
-class RetryDataSource<V>(
+class DataSourceRetrier<V>(
   private val getDataSource: GetDataSource<V>,
   private val putDataSource: PutDataSource<V>,
   private val deleteDataSource: DeleteDataSource,
