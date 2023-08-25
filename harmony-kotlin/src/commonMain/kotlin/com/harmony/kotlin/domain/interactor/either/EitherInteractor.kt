@@ -13,36 +13,32 @@ import com.harmony.kotlin.error.HarmonyException
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-class GetInteractor<M>(val coroutineContext: CoroutineContext, val getRepository: GetRepository<M>) {
+class GetInteractor<Q : Query, M>(val coroutineContext: CoroutineContext, val getRepository: GetRepository<Q, M>) {
 
-  suspend inline operator fun <reified E : HarmonyException> invoke(query: Query = VoidQuery, operation: Operation = DefaultOperation): Either<E, M> =
+  suspend inline operator fun <reified E : HarmonyException> invoke(query: Q, operation: Operation = DefaultOperation): Either<E, M> =
     withContext(coroutineContext) {
       eitherOf { getRepository.get(query, operation) }
     }
 }
 
-class PutInteractor<M>(val coroutineContext: CoroutineContext, val putRepository: PutRepository<M>) {
+class PutInteractor<Q : Query, M>(val coroutineContext: CoroutineContext, val putRepository: PutRepository<Q, M>) {
 
-  suspend inline operator fun <reified E : HarmonyException> invoke(
-    m: M? = null,
-    query: Query = VoidQuery,
-    operation: Operation = DefaultOperation
-  ): Either<E, M> =
+  suspend inline operator fun <reified E : HarmonyException> invoke(m: M? = null, query: Q, operation: Operation = DefaultOperation): Either<E, M> =
     withContext(coroutineContext) {
       eitherOf { putRepository.put(query, m, operation) }
     }
 }
 
-class DeleteInteractor(val coroutineContext: CoroutineContext, val deleteRepository: DeleteRepository) {
+class DeleteInteractor<Q : Query>(val coroutineContext: CoroutineContext, val deleteRepository: DeleteRepository<Q>) {
 
-  suspend inline operator fun <reified E : HarmonyException> invoke(query: Query = VoidQuery, operation: Operation = DefaultOperation): Either<E, Unit> =
+  suspend inline operator fun <reified E : HarmonyException> invoke(query: Q, operation: Operation = DefaultOperation): Either<E, Unit> =
     withContext(coroutineContext) {
       eitherOf { deleteRepository.delete(query, operation) }
     }
 }
 
-fun <V> GetRepository<V>.toGetInteractor(coroutineContext: CoroutineContext) = GetInteractor(coroutineContext, this)
+fun <Q : Query, V> GetRepository<Q, V>.toGetInteractor(coroutineContext: CoroutineContext) = GetInteractor(coroutineContext, this)
 
-fun <V> PutRepository<V>.toPutInteractor(coroutineContext: CoroutineContext) = PutInteractor(coroutineContext, this)
+fun <Q : Query, V> PutRepository<Q, V>.toPutInteractor(coroutineContext: CoroutineContext) = PutInteractor(coroutineContext, this)
 
-fun <E> DeleteRepository.toDeleteInteractor(coroutineContext: CoroutineContext) = DeleteInteractor(coroutineContext, this)
+fun <Q : Query> DeleteRepository<Q>.toDeleteInteractor(coroutineContext: CoroutineContext) = DeleteInteractor(coroutineContext, this)

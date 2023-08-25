@@ -9,7 +9,6 @@ import com.harmony.kotlin.data.query.Query
 import com.harmony.kotlin.error.QueryNotSupportedException
 import io.ktor.client.HttpClient
 import io.ktor.client.statement.HttpResponse
-import kotlinx.serialization.json.Json
 
 class GetNetworkDataSource<T>(
   private val url: String,
@@ -17,7 +16,7 @@ class GetNetworkDataSource<T>(
   private val networkResponseDecoder: NetworkResponseDecoder<T>,
   private val globalHeaders: List<Pair<String, String>> = emptyList(),
   private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
-) : GetDataSource<T> {
+) : GetDataSource<NetworkQuery,T> {
 
   /**
    * GET request returning an object
@@ -49,13 +48,13 @@ class PutNetworkDataSource<T>(
   private val globalHeaders: List<Pair<String, String>> = emptyList(),
   private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
 
-) : PutDataSource<T> {
+) : PutDataSource<NetworkQuery,T> {
 
   /**
    * POST or PUT request returning an object
    * @throws IllegalArgumentException if both value and content-type of the query method are defined
    */
-  override suspend fun put(query: Query, value: T?): T {
+  override suspend fun put(query: NetworkQuery, value: T?): T {
     val response: HttpResponse = tryOrThrow(exceptionMapper) {
       validateQuery(query)
         .sanitizeContentType(value)
@@ -107,12 +106,12 @@ class DeleteNetworkDataSource(
   private val httpClient: HttpClient,
   private val globalHeaders: List<Pair<String, String>> = emptyList(),
   private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
-) : DeleteDataSource {
+) : DeleteDataSource<NetworkQuery> {
 
   /**
    * DELETE request
    */
-  override suspend fun delete(query: Query) {
+  override suspend fun delete(query: NetworkQuery) {
     tryOrThrow(exceptionMapper) {
       validateQuery(query).executeKtorRequest(httpClient = httpClient, baseUrl = url, globalHeaders = globalHeaders)
     }

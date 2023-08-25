@@ -13,7 +13,7 @@ import com.harmony.kotlin.error.notSupportedQuery
 class DeviceStorageDataSource<T>(
   private val sharedPreferences: SharedPreferences,
   private val prefix: String = ""
-) : GetDataSource<T>, PutDataSource<T>, DeleteDataSource {
+) : GetDataSource<KeyQuery, T>, PutDataSource<KeyQuery, T>, DeleteDataSource<Query> {
 
   override suspend fun get(query: Query): T =
     when (query) {
@@ -25,10 +25,11 @@ class DeviceStorageDataSource<T>(
 
         sharedPreferences.all[key] as T
       }
+
       else -> notSupportedQuery()
     }
 
-  override suspend fun put(query: Query, value: T?): T =
+  override suspend fun put(query: KeyQuery, value: T?): T =
     when (query) {
       is KeyQuery -> {
         value?.let {
@@ -45,6 +46,7 @@ class DeviceStorageDataSource<T>(
                 editor.putStringSet(key, castedValue).apply()
               } ?: throw IllegalArgumentException("value type is not supported")
             }
+
             else -> {
               throw IllegalArgumentException("value type is not supported")
             }
@@ -53,6 +55,7 @@ class DeviceStorageDataSource<T>(
           return@let it
         } ?: throw IllegalArgumentException("value must be not null")
       }
+
       else -> notSupportedQuery()
     }
 
@@ -68,11 +71,13 @@ class DeviceStorageDataSource<T>(
           apply()
         }
       }
+
       is KeyQuery -> {
         sharedPreferences.edit()
           .remove(addPrefixTo(query.key))
           .apply()
       }
+
       else -> notSupportedQuery()
     }
 

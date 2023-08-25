@@ -10,22 +10,22 @@ import com.harmony.kotlin.data.repository.SinglePutDataSourceRepository
 import com.harmony.kotlin.data.repository.withMapping
 
 // DataSources
-interface GetDataSource<V> {
+interface GetDataSource<Q : Query, V> {
   suspend fun get(query: Query): V
 }
 
-interface PutDataSource<V> {
-  suspend fun put(query: Query, value: V?): V
+interface PutDataSource<Q : Query, V> {
+  suspend fun put(query: Q, value: V?): V
 }
 
-interface DeleteDataSource {
-  suspend fun delete(query: Query)
+interface DeleteDataSource<Q : Query> {
+  suspend fun delete(query: Q)
 }
 
 // Extensions to create
-fun <V> GetDataSource<V>.toGetRepository() = SingleGetDataSourceRepository(this)
+fun <Q : Query, V> GetDataSource<Q, V>.toGetRepository() = SingleGetDataSourceRepository<Q>(this)
 
-fun <K, V> GetDataSource<K>.toGetRepository(mapper: Mapper<K, V>): GetRepository<V> = toGetRepository().withMapping(mapper)
+fun <K, V> GetDataSource<Query, K>.toGetRepository(mapper: Mapper<K, V>): GetRepository<Query,V> = toGetRepository().withMapping(mapper)
 
 fun <V> PutDataSource<V>.toPutRepository() = SinglePutDataSourceRepository(this)
 
