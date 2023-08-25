@@ -200,7 +200,7 @@ class PutNetworkDataSourceTest : BaseTest() {
       pathUrl
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder(), emptyList()
+      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder, emptyList()
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
@@ -222,7 +222,7 @@ class PutNetworkDataSourceTest : BaseTest() {
       pathUrl
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder(), emptyList()
+      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder, emptyList()
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
@@ -244,7 +244,7 @@ class PutNetworkDataSourceTest : BaseTest() {
       pathUrl
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder(), emptyList()
+      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder, emptyList()
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
@@ -262,7 +262,7 @@ class PutNetworkDataSourceTest : BaseTest() {
       pathUrl
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder(), emptyList()
+      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder, emptyList()
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
