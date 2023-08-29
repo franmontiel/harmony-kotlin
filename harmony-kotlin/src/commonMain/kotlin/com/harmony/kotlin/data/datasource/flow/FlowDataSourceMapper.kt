@@ -20,7 +20,7 @@ class FlowDataSourceMapper<In, Out>(
   putDataSource: FlowPutDataSource<In>,
   private val deleteDataSource: FlowDeleteDataSource,
   toOutMapper: Mapper<In, Out>,
-  toInMapper: Mapper<Out, In>
+  toInMapper: Mapper<Out, In>,
 ) : FlowGetDataSource<Out>, FlowPutDataSource<Out>, FlowDeleteDataSource {
 
   private val getDataSourceMapper = FlowGetDataSourceMapper(getDataSource, toOutMapper)
@@ -35,7 +35,7 @@ class FlowDataSourceMapper<In, Out>(
 
 class FlowGetDataSourceMapper<In, Out>(
   private val getDataSource: FlowGetDataSource<In>,
-  private val toOutMapper: Mapper<In, Out>
+  private val toOutMapper: Mapper<In, Out>,
 ) : FlowGetDataSource<Out> {
 
   override fun get(query: Query): Flow<Out> = getDataSource.get(query).map { toOutMapper.map(it) }
@@ -44,7 +44,7 @@ class FlowGetDataSourceMapper<In, Out>(
 class FlowPutDataSourceMapper<In, Out>(
   private val putDataSource: FlowPutDataSource<In>,
   private val toOutMapper: Mapper<In, Out>,
-  private val toInMapper: Mapper<Out, In>
+  private val toInMapper: Mapper<Out, In>,
 ) : FlowPutDataSource<Out> {
 
   override fun put(query: Query, value: Out?): Flow<Out> {

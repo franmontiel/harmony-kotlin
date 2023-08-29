@@ -14,16 +14,21 @@ import com.harmony.kotlin.data.query.Query
  * @param deleteQueryMapper Mapper for delete operations
  */
 @Suppress("UNCHECKED_CAST")
-class DataSourceQueryMapper<V,
-  GetQueryIn : Query, GetQueryOut : Query,
-  PutQueryIn : Query, PutQueryOut : Query,
-  DeleteQueryIn : Query, DeleteQueryOut : Query>(
+class DataSourceQueryMapper<
+  V,
+  GetQueryIn : Query,
+  GetQueryOut : Query,
+  PutQueryIn : Query,
+  PutQueryOut : Query,
+  DeleteQueryIn : Query,
+  DeleteQueryOut : Query,
+  >(
   private val getDataSource: GetDataSource<V>,
   private val putDataSource: PutDataSource<V>,
   private val deleteDataSource: DeleteDataSource,
   private val getQueryMapper: Mapper<GetQueryIn, GetQueryOut>,
   private val putQueryMapper: Mapper<PutQueryIn, PutQueryOut>,
-  private val deleteQueryMapper: Mapper<DeleteQueryIn, DeleteQueryOut>
+  private val deleteQueryMapper: Mapper<DeleteQueryIn, DeleteQueryOut>,
 ) : GetDataSource<V>, PutDataSource<V>, DeleteDataSource {
 
   override suspend fun get(query: Query): V {

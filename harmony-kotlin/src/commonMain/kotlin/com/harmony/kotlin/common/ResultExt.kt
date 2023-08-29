@@ -13,9 +13,8 @@ inline fun <T> Result<T>.onComplete(
   onFailureLogger: Logger,
   tag: String,
   onSuccess: (T) -> Unit,
-  onFailure: ((Throwable) -> Unit) = { _ -> }
+  onFailure: ((Throwable) -> Unit) = { _ -> },
 ) {
-
   if (this.isSuccess) {
     this.onSuccess { onSuccess(it) }
   } else {

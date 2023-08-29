@@ -9,7 +9,7 @@ interface Logger {
     DEBUG("DEBUG"),
     INFO("INFO"),
     WARNING("WARNING"),
-    ERROR("ERROR")
+    ERROR("ERROR"),
   }
 
   /** Logs a String object using a given level.  */

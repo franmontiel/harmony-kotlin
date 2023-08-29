@@ -9,7 +9,7 @@ import com.harmony.kotlin.data.query.Query
 class SingleDataSourceRepository<T>(
   private val getDataSource: GetDataSource<T>,
   private val putDataSource: PutDataSource<T>,
-  private val deleteDataSource: DeleteDataSource
+  private val deleteDataSource: DeleteDataSource,
 ) : GetRepository<T>, PutRepository<T>, DeleteRepository {
 
   override suspend fun get(query: Query, operation: Operation): T = getDataSource.get(query)

@@ -20,7 +20,7 @@ internal class HackerNewsPostEntityToHackerNewsPostMapper :
         .toLocalDateTime(TimeZone.currentSystemDefault()),
       from.title ?: "",
       from.type,
-      from.url
+      from.url,
     )
   }
 }

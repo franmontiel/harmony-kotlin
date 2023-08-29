@@ -12,7 +12,7 @@ import com.harmony.kotlin.error.notSupportedQuery
 
 class DeviceStorageDataSource<T>(
   private val sharedPreferences: SharedPreferences,
-  private val prefix: String = ""
+  private val prefix: String = "",
 ) : GetDataSource<T>, PutDataSource<T>, DeleteDataSource {
 
   override suspend fun get(query: Query): T =

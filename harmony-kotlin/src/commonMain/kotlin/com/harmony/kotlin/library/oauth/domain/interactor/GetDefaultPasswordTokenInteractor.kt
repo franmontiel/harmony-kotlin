@@ -12,7 +12,7 @@ interface GetPasswordTokenInteractor {
 
 class GetDefaultPasswordTokenInteractor(
   private val coroutineContext: CoroutineContext,
-  private val getToken: GetInteractor<OAuthToken>
+  private val getToken: GetInteractor<OAuthToken>,
 ) : GetPasswordTokenInteractor {
 
   override suspend operator fun invoke(id: String): OAuthToken {

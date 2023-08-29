@@ -19,7 +19,7 @@ class RepositoryMapper<In, Out>(
   private val putRepository: PutRepository<In>,
   private val deleteRepository: DeleteRepository,
   private val toOutMapper: Mapper<In, Out>,
-  private val toInMapper: Mapper<Out, In>
+  private val toInMapper: Mapper<Out, In>,
 ) : GetRepository<Out>, PutRepository<Out>, DeleteRepository {
 
   override suspend fun get(query: Query, operation: Operation): Out = get(getRepository, toOutMapper, query, operation)
@@ -31,7 +31,7 @@ class RepositoryMapper<In, Out>(
 
 class GetRepositoryMapper<In, Out>(
   private val getRepository: GetRepository<In>,
-  private val toOutMapper: Mapper<In, Out>
+  private val toOutMapper: Mapper<In, Out>,
 ) : GetRepository<Out> {
 
   override suspend fun get(query: Query, operation: Operation): Out = get(getRepository, toOutMapper, query, operation)
@@ -40,7 +40,7 @@ class GetRepositoryMapper<In, Out>(
 class PutRepositoryMapper<In, Out>(
   private val putRepository: PutRepository<In>,
   private val toOutMapper: Mapper<In, Out>,
-  private val toInMapper: Mapper<Out, In>
+  private val toInMapper: Mapper<Out, In>,
 ) : PutRepository<Out> {
 
   override suspend fun put(query: Query, value: Out?, operation: Operation): Out = put(putRepository, toOutMapper, toInMapper, value, query, operation)
@@ -50,16 +50,17 @@ private suspend fun <In, Out> get(
   getRepository: GetRepository<In>,
   toOutMapper: Mapper<In, Out>,
   query: Query,
-  operation: Operation
+  operation: Operation,
 ): Out = getRepository.get(query, operation).let { toOutMapper.map(it) }
 
+@Suppress("LongParameterList")
 private suspend fun <In, Out> put(
   putRepository: PutRepository<In>,
   toOutMapper: Mapper<In, Out>,
   toInMapper: Mapper<Out, In>,
   value: Out?,
   query: Query,
-  operation: Operation
+  operation: Operation,
 ): Out {
   val mapped = value?.let { toInMapper.map(it) }
   return putRepository.put(query, mapped, operation).let {

@@ -10,7 +10,7 @@ class HackerNewsQueryToNetworkQueryMapper : Mapper<HackerNewsQuery, NetworkQuery
       HackerNewsQuery.GetAll -> {
         NetworkQuery(
           NetworkQuery.Method.Get,
-          "askstories.json"
+          "askstories.json",
         )
       }
       is HackerNewsQuery.GetPost -> {

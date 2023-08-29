@@ -10,7 +10,7 @@ class FlowDataSourceValidator<T>(
   private val getDataSource: FlowGetDataSource<T>,
   private val putDataSource: FlowPutDataSource<T>,
   private val deleteDataSource: FlowDeleteDataSource,
-  private val validator: Validator<T>
+  private val validator: Validator<T>,
 ) : FlowGetDataSource<T>, FlowPutDataSource<T>, FlowDeleteDataSource {
 
   override fun get(query: Query): Flow<T> = getDataSource.get(query).map {

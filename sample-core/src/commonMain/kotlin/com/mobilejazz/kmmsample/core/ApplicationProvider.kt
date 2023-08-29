@@ -22,7 +22,7 @@ expect val engine: HttpClientEngine
 
 class ApplicationDefaultModule(
   private val coreLogger: Logger,
-  private val cacheSQLConfiguration: CacheSQLConfiguration
+  private val cacheSQLConfiguration: CacheSQLConfiguration,
 ) : ApplicationComponent {
   private val coroutineDispatcher: CoroutineDispatcher by lazy {
     dispatcher()
@@ -44,7 +44,7 @@ class ApplicationDefaultModule(
       networkComponent.mainNetworkConfiguration,
       coroutineDispatcher,
       cacheSQLConfiguration,
-      Cbor
+      Cbor,
     )
   }
 }

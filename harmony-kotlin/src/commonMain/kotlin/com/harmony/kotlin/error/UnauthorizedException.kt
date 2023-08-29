@@ -6,5 +6,5 @@ package com.harmony.kotlin.error
 data class UnauthorizedException(
   override val message: String? = null,
   override val cause: Throwable,
-  val isResolved: Boolean
+  val isResolved: Boolean,
 ) : HarmonyException(message, cause)

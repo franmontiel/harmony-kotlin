@@ -3,7 +3,7 @@ package com.harmony.kotlin.data.validator.vastra.strategies
 enum class ValidationStrategyResult {
   UNKNOWN,
   VALID,
-  INVALID
+  INVALID,
 }
 
 interface ValidationStrategyEntity

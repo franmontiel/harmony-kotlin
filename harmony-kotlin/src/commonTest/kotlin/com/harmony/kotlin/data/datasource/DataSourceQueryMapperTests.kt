@@ -39,7 +39,7 @@ class DataSourceQueryMapperTests : BaseTest() {
       anyVoidDataSource<Unit>(),
       getQueryMapper,
       anyVoidMapper(),
-      anyVoidMapper()
+      anyVoidMapper(),
     )
 
     mocker.every { getQueryMapper.map(expectedQuery) } returns expectedQueryMapped
@@ -68,7 +68,7 @@ class DataSourceQueryMapperTests : BaseTest() {
       anyVoidDataSource<Unit>(),
       getQueryMapper,
       anyVoidMapper(),
-      anyVoidMapper()
+      anyVoidMapper(),
     )
 
     assertFailsWith(DataNotFoundException::class) {
@@ -100,7 +100,7 @@ class DataSourceQueryMapperTests : BaseTest() {
       anyVoidDataSource<Unit>(),
       anyVoidMapper(),
       putQueryMapper,
-      anyVoidMapper()
+      anyVoidMapper(),
     )
 
     mocker.every { putQueryMapper.map(expectedQuery) } returns expectedQueryMapped
@@ -130,7 +130,7 @@ class DataSourceQueryMapperTests : BaseTest() {
       anyVoidDataSource<Unit>(),
       anyVoidMapper(),
       putQueryMapper,
-      anyVoidMapper()
+      anyVoidMapper(),
     )
 
     assertFailsWith(DataNotFoundException::class) {

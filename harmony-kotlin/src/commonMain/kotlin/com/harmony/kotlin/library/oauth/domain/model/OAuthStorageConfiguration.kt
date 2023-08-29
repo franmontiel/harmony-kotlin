@@ -10,7 +10,7 @@ import com.harmony.kotlin.data.datasource.memory.InMemoryDataSource
 data class OAuthStorageConfiguration(
   val getDataSource: GetDataSource<ByteArray>,
   val putDataSource: PutDataSource<ByteArray>,
-  val deleteDataSource: DeleteDataSource
+  val deleteDataSource: DeleteDataSource,
 )
 
 fun oauthStorageConfigurationInMemory(): OAuthStorageConfiguration {

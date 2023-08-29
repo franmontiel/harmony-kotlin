@@ -11,13 +11,13 @@ internal sealed class OAuthBodyRequest(@SerialName("grant_type") private val gra
 
   @Serializable
   class RefreshToken(
-    @SerialName("refresh_token") val refreshToken: String
+    @SerialName("refresh_token") val refreshToken: String,
   ) : OAuthBodyRequest("refresh_token")
 
   @Serializable
   class ClientCredentials(
     @SerialName("client_id") val clientId: String,
-    @SerialName("client_secret") val clientSecret: String
+    @SerialName("client_secret") val clientSecret: String,
   ) :
     OAuthBodyRequest("client_credentials")
 }

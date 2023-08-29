@@ -96,7 +96,7 @@ class GetNetworkDataSourceTests : BaseTest() {
       method = NetworkQuery.Method.Get,
       path = expectedPath,
       headers = expectedHeaders,
-      urlParams = expectedParams
+      urlParams = expectedParams,
     )
 
     val response = getNetworkDataSource.get(query)
@@ -122,15 +122,16 @@ class GetNetworkDataSourceTests : BaseTest() {
       requestSpy = it
     }
     val getNetworkDataSource = givenGetNetworkDataSource(
-      mockEngine, expectedGlobalHeaders,
+      mockEngine,
+      expectedGlobalHeaders,
       serializer = ListSerializer
-      (DummyHttpResponse.serializer())
+      (DummyHttpResponse.serializer()),
     )
     val query = NetworkQuery(
       method = NetworkQuery.Method.Get,
       path = expectedPath,
       headers = expectedHeaders,
-      urlParams = expectedParams
+      urlParams = expectedParams,
     )
 
     val response = getNetworkDataSource.get(query)
@@ -164,7 +165,7 @@ class GetNetworkDataSourceTests : BaseTest() {
       method = NetworkQuery.Method.Get,
       path = expectedPath,
       headers = expectedHeaders,
-      urlParams = expectedParams
+      urlParams = expectedParams,
     )
     mocker.everySuspending { mockGetPasswordTokenInteractor.invoke(isAny()) } returns fakeToken
 
@@ -191,7 +192,7 @@ class GetNetworkDataSourceTests : BaseTest() {
       method = NetworkQuery.Method.Get,
       path = randomString(),
       headers = randomPairList(),
-      urlParams = randomPairList()
+      urlParams = randomPairList(),
     )
     mocker.everySuspending { mockGetPasswordTokenInteractor.invoke(isAny()) } runs { throw AnyException() }
 
@@ -242,6 +243,6 @@ class GetNetworkDataSourceTests : BaseTest() {
     httpClient = HttpClient(engine = mockEngine),
     networkResponseDecoder = SerializedNetworkResponseDecoder(Json, serializer),
     globalHeaders = globalHeaders,
-    exceptionMapper
+    exceptionMapper,
   )
 }

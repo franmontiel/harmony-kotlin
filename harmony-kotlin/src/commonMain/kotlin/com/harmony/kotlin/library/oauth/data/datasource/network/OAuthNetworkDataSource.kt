@@ -17,7 +17,7 @@ import io.ktor.http.contentType
 internal class OAuthNetworkDataSource(
   private val httpClient: HttpClient,
   private val apiPath: String,
-  private val basicAuthorizationCode: String
+  private val basicAuthorizationCode: String,
 ) : PutDataSource<OAuthTokenEntity> {
 
   override suspend fun put(query: Query, value: OAuthTokenEntity?): OAuthTokenEntity {
@@ -26,7 +26,7 @@ internal class OAuthNetworkDataSource(
       is OAuthQuery.RefreshToken -> OAuthBodyRequest.RefreshToken(query.refreshToken)
       is OAuthQuery.ClientCredentials -> OAuthBodyRequest.ClientCredentials(
         query.clientId,
-        query.clientSecret
+        query.clientSecret,
       )
 
       else -> notSupportedQuery()

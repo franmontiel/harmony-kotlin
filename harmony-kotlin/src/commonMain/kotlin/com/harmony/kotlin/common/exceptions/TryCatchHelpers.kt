@@ -11,9 +11,8 @@ inline fun <R> tryOrThrow(
   message: String = "Exception logged",
   level: Logger.Level = Logger.Level
     .WARNING,
-  block: () -> R
-):
-  R {
+  block: () -> R,
+): R {
   return try {
     block()
   } catch (e: Exception) {
@@ -32,7 +31,7 @@ inline fun <R> tryOrCatch(
   tag: String = "TryOrCatch",
   message: String = "Exception logged",
   level: Logger.Level = Logger.Level.WARNING,
-  block: () -> R
+  block: () -> R,
 ) {
   return try {
     block()
@@ -53,7 +52,7 @@ inline fun <R> tryOrNull(
   tag: String = "TryOrNull",
   message: String = "Exception logged",
   level: Logger.Level = Logger.Level.WARNING,
-  block: () -> R
+  block: () -> R,
 ): R? {
   return try {
     block()
@@ -68,13 +67,14 @@ inline fun <R> tryOrNull(
  *
  * Optionally a logger and some parameters can be passed to log the Exception
  */
+@Suppress("LongParameterList")
 inline fun <R> tryOrDefault(
   logger: Logger? = null,
   tag: String = "TryOrDefault",
   message: String = "Exception logged",
   level: Logger.Level = Logger.Level.WARNING,
   defaultValue: R,
-  block: () -> R
+  block: () -> R,
 ): R {
   return try {
     block()

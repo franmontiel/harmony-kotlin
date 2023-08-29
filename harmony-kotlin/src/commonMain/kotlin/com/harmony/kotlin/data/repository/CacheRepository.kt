@@ -16,6 +16,7 @@ import com.harmony.kotlin.error.DataNotValidException
 import com.harmony.kotlin.error.DataSerializationException
 import com.harmony.kotlin.error.notSupportedOperation
 
+@Suppress("LongParameterList")
 class CacheRepository<V>(
   private val getCache: GetDataSource<V>,
   private val putCache: PutDataSource<V>,
@@ -23,7 +24,7 @@ class CacheRepository<V>(
   private val getMain: GetDataSource<V>,
   private val putMain: PutDataSource<V>,
   private val deleteMain: DeleteDataSource,
-  private val validator: Validator<V> = DefaultValidator()
+  private val validator: Validator<V> = DefaultValidator(),
 ) : GetRepository<V>, PutRepository<V>, DeleteRepository {
 
   override suspend fun get(query: Query, operation: Operation): V = when (operation) {
@@ -99,7 +100,8 @@ class CacheRepository<V>(
       when (cacheException) {
         is DataNotValidException,
         is DataSerializationException,
-        is DataNotFoundException -> get(query, MainSyncOperation)
+        is DataNotFoundException,
+        -> get(query, MainSyncOperation)
 
         else -> throw cacheException
       }

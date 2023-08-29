@@ -45,8 +45,8 @@ suspend fun NetworkQuery.executeKtorRequest(httpClient: HttpClient, baseUrl: Str
                 contentType.params.forEach {
                   append(it.first, it.second)
                 }
-              }
-            )
+              },
+            ),
           )
         }
         is NetworkQuery.ContentType.Json<*> -> {
@@ -64,7 +64,6 @@ suspend fun NetworkQuery.executeKtorRequest(httpClient: HttpClient, baseUrl: Str
  * **IMPORTANT:** This method is intended to be used only be used inside a Network DataSource
  */
 fun NetworkQuery.generateKtorUrl(baseUrl: String): Url {
-
   val sanitizedBaseUrl = baseUrl.removeSuffix("/")
   val sanitizedPaths = this.path.split("/").filter { it.isNotEmpty() }.joinToString(separator = "/", prefix = "/")
 

@@ -12,12 +12,12 @@ interface ViewModelComponent {
 
 class ViewModelDefaultModule(
   private val logger: Logger,
-  private val hackerNewsPostsComponent: HackerNewsPostsComponent
+  private val hackerNewsPostsComponent: HackerNewsPostsComponent,
 ) : ViewModelComponent {
   override fun getHackerPostsViewModel(): HackerPostsViewModel {
     return HackerPostsViewModel(
       hackerNewsPostsComponent.getHackerNewsPostsInteractor(),
-      logger
+      logger,
     )
   }
 

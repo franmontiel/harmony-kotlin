@@ -29,6 +29,6 @@ class CacheOperation(val fallback: (cacheOperationThrowable: Throwable) -> Boole
 class CacheSyncOperation(
   val fallback: (
     mainThrowable: Throwable,
-    cacheThrowable: Throwable
-  ) -> Boolean = { _, _ -> false }
+    cacheThrowable: Throwable,
+  ) -> Boolean = { _, _ -> false },
 ) : Operation()

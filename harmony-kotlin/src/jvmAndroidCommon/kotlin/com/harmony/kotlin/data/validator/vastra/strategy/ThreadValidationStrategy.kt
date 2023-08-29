@@ -13,7 +13,6 @@ class ThreadValidationStrategy(thread: Thread) : ValidationStrategy {
   private val weakThread = WeakReference(thread)
 
   override fun <T : ValidationStrategyEntity> isValid(t: T): ValidationStrategyResult {
-
     val executingOnValidThread = weakThread.get()?.let {
       it == Thread.currentThread()
     } ?: false

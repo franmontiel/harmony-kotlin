@@ -39,6 +39,8 @@ class DataSourceRetrier<V>(
       logger?.d("RetryDataSource", "failed attempt ${this.maxAmountOfExecutions - retryCount + 1} of max retries ${this.maxAmountOfExecutions}:\n\t$error")
       if (retryCount > 1 && retryIf(error)) {
         executeWithRetries(retryCount - 1, functionToRetry)
-      } else throw error
+      } else {
+        throw error
+      }
     }
 }
