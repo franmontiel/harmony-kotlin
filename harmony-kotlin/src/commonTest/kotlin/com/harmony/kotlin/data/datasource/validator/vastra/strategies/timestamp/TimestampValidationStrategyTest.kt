@@ -35,7 +35,7 @@ class TimestampValidationStrategyTest : BaseTest() {
   fun should_values_be_valid_if_value_are_not_expired() {
     val values = listOf(
       Foo("bar", lastUpdatedAt = Clock.System.now().toEpochMilliseconds(), expireIn = 1.minutes.toLong(DurationUnit.MILLISECONDS)),
-      Foo("bar", lastUpdatedAt = Clock.System.now().toEpochMilliseconds(), expireIn = 1.minutes.toLong(DurationUnit.MILLISECONDS))
+      Foo("bar", lastUpdatedAt = Clock.System.now().toEpochMilliseconds(), expireIn = 1.minutes.toLong(DurationUnit.MILLISECONDS)),
     )
 
     val timestampValidationStrategy = TimestampValidationStrategy()
@@ -61,12 +61,11 @@ class TimestampValidationStrategyTest : BaseTest() {
   @Test
   fun should_values_be_invalid_if_values_are_expired() {
     runTest {
-
       val yesterday = Clock.System.now().minus(1.days).toEpochMilliseconds()
 
       val values = listOf(
         Foo("bar", lastUpdatedAt = yesterday, expireIn = 1.minutes.toLong(DurationUnit.MILLISECONDS)),
-        Foo("bar", lastUpdatedAt = yesterday, expireIn = 1.minutes.toLong(DurationUnit.MILLISECONDS))
+        Foo("bar", lastUpdatedAt = yesterday, expireIn = 1.minutes.toLong(DurationUnit.MILLISECONDS)),
       )
 
       val timestampValidationStrategy = TimestampValidationStrategy()

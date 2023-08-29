@@ -23,7 +23,7 @@ class ApiMock {
         Json {
           isLenient = false
           ignoreUnknownKeys = true
-        }
+        },
       )
     }
 
@@ -42,7 +42,7 @@ private class ApiMockEngine {
     val mockRequests = listOf(
       UnauthorizedRequest,
       NotFoundRequest,
-      BadRequest
+      BadRequest,
     )
 
     engine {

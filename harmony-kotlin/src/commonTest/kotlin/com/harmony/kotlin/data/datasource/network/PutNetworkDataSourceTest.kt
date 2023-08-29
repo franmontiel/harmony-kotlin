@@ -109,7 +109,7 @@ class PutNetworkDataSourceTest : BaseTest() {
 
     val invalidQuery = NetworkQuery(
       NetworkQuery.Method.Put(NetworkQuery.ContentType.Json(anyObject())),
-      randomString()
+      randomString(),
     )
 
     assertFailsWith<IllegalArgumentException> {
@@ -123,7 +123,7 @@ class PutNetworkDataSourceTest : BaseTest() {
 
     val invalidQuery = NetworkQuery(
       NetworkQuery.Method.Post(NetworkQuery.ContentType.FormUrlEncoded(emptyList())),
-      randomString()
+      randomString(),
     )
 
     assertFailsWith<IllegalArgumentException> {
@@ -138,7 +138,7 @@ class PutNetworkDataSourceTest : BaseTest() {
     }
     val contentTypeQuery = NetworkQuery(
       NetworkQuery.Method.Put(NetworkQuery.ContentType.Json(objectToSend)),
-      pathUrl
+      pathUrl,
     )
     val putNetworkDataSource = givenPutNetworkDataSource(mockEngine)
 
@@ -158,7 +158,7 @@ class PutNetworkDataSourceTest : BaseTest() {
     }
     val contentTypeQuery = NetworkQuery(
       NetworkQuery.Method.Put(NetworkQuery.ContentType.FormUrlEncoded(randomPairList())),
-      pathUrl
+      pathUrl,
     )
     val putNetworkDataSource = givenPutNetworkDataSource(mockEngine)
 
@@ -177,7 +177,8 @@ class PutNetworkDataSourceTest : BaseTest() {
       requestSpy = it
     }
     val contentTypeQuery = NetworkQuery(
-      NetworkQuery.Method.Put(), pathUrl
+      NetworkQuery.Method.Put(),
+      pathUrl,
     )
     val putNetworkDataSource = givenPutNetworkDataSource(mockEngine)
 
@@ -197,10 +198,13 @@ class PutNetworkDataSourceTest : BaseTest() {
     }
     val contentTypeQuery = NetworkQuery(
       NetworkQuery.Method.Put(NetworkQuery.ContentType.Json(objectToSend)),
-      pathUrl
+      pathUrl,
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder, emptyList()
+      baseUrl,
+      mockHttpClient(mockEngine),
+      IgnoreNetworkResponseDecoder,
+      emptyList(),
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
@@ -219,10 +223,13 @@ class PutNetworkDataSourceTest : BaseTest() {
     }
     val contentTypeQuery = NetworkQuery(
       NetworkQuery.Method.Put(NetworkQuery.ContentType.Json(objectToSend)),
-      pathUrl
+      pathUrl,
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder, emptyList()
+      baseUrl,
+      mockHttpClient(mockEngine),
+      IgnoreNetworkResponseDecoder,
+      emptyList(),
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
@@ -241,10 +248,13 @@ class PutNetworkDataSourceTest : BaseTest() {
     }
     val contentTypeQuery = NetworkQuery(
       NetworkQuery.Method.Put(NetworkQuery.ContentType.Json(listOf(objectToSend))),
-      pathUrl
+      pathUrl,
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder, emptyList()
+      baseUrl,
+      mockHttpClient(mockEngine),
+      IgnoreNetworkResponseDecoder,
+      emptyList(),
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
@@ -259,10 +269,13 @@ class PutNetworkDataSourceTest : BaseTest() {
     }
     val contentTypeQuery = NetworkQuery(
       NetworkQuery.Method.Put(NetworkQuery.ContentType.Json(listOf(objectToSend))),
-      pathUrl
+      pathUrl,
     )
     val putNetworkDataSource = PutNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), IgnoreNetworkResponseDecoder, emptyList()
+      baseUrl,
+      mockHttpClient(mockEngine),
+      IgnoreNetworkResponseDecoder,
+      emptyList(),
     )
 
     val putResult = putNetworkDataSource.put(contentTypeQuery, null)
@@ -276,7 +289,8 @@ class PutNetworkDataSourceTest : BaseTest() {
       requestSpy = it
     }
     val contentTypeQuery = NetworkQuery(
-      NetworkQuery.Method.Put(NetworkQuery.ContentType.Json(objectToSend)), pathUrl
+      NetworkQuery.Method.Put(NetworkQuery.ContentType.Json(objectToSend)),
+      pathUrl,
     )
     val putNetworkDataSource = givenPutNetworkDataSource(mockEngine)
 
@@ -296,7 +310,8 @@ class PutNetworkDataSourceTest : BaseTest() {
       requestSpy = it
     }
     val contentTypeQuery = NetworkQuery(
-      NetworkQuery.Method.Post(), pathUrl
+      NetworkQuery.Method.Post(),
+      pathUrl,
     )
     val putNetworkDataSource = givenPutNetworkDataSource(mockEngine)
 
@@ -321,7 +336,8 @@ class PutNetworkDataSourceTest : BaseTest() {
     mocker.everySuspending { getPasswordTokenInteractor(isAny()) } returns fakeToken
     val contentTypeQuery = OAuthNetworkQuery(
       getPasswordTokenInteractor,
-      NetworkQuery.Method.Put(), pathUrl
+      NetworkQuery.Method.Put(),
+      pathUrl,
     )
     val putNetworkDataSource = givenPutNetworkDataSource(mockEngine)
 
@@ -341,7 +357,8 @@ class PutNetworkDataSourceTest : BaseTest() {
       requestSpy = it
     }
     val contentTypeQuery = NetworkQuery(
-      NetworkQuery.Method.Put(), pathUrl,
+      NetworkQuery.Method.Put(),
+      pathUrl,
       listOf("query_string" to "whatever"),
     )
     val putNetworkDataSource = givenPutNetworkDataSource(mockEngine)
@@ -364,9 +381,10 @@ class PutNetworkDataSourceTest : BaseTest() {
     val suspendHeaders = anyHeaders()
     val putNetworkDataSource = givenPutNetworkDataSource(mockEngine, globalHeaders)
     val contentTypeQuery = NetworkQuery(
-      NetworkQuery.Method.Put(), pathUrl,
+      NetworkQuery.Method.Put(),
+      pathUrl,
       headers = queryHeaders,
-      suspendHeaders = { suspendHeaders }
+      suspendHeaders = { suspendHeaders },
     )
 
     putNetworkDataSource.put(contentTypeQuery, objectToSend)
@@ -386,7 +404,8 @@ class PutNetworkDataSourceTest : BaseTest() {
     val datasource = givenPutNetworkDataSource(mockEngine)
     val contentTypeQuery = OAuthNetworkQuery(
       getPasswordTokenInteractor,
-      NetworkQuery.Method.Put(), pathUrl
+      NetworkQuery.Method.Put(),
+      pathUrl,
     )
     mocker.everySuspending { getPasswordTokenInteractor(isAny()) } runs { throw AnyException() }
 
@@ -398,14 +417,14 @@ class PutNetworkDataSourceTest : BaseTest() {
   private fun mockHttpClient(
     mockEngine: MockEngine = MockEngine {
       respondOk("{\"key\":\"${randomString()}\"}")
-    }
+    },
   ) = HttpClient(mockEngine) {
     install(ContentNegotiation) {
       json(
         Json {
           isLenient = false
           ignoreUnknownKeys = true
-        }
+        },
       )
     }
   }
@@ -428,8 +447,12 @@ class PutNetworkDataSourceTest : BaseTest() {
       respondOk("{\"key\":\"${randomString()}\"}")
     },
     globalHeaders: List<Pair<String, String>> = emptyList(),
-    exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
+    exceptionMapper: Mapper<Exception, Exception> = IdentityMapper(),
   ) = PutNetworkDataSource(
-    baseUrl, mockHttpClient(mockEngine), SerializedNetworkResponseDecoder(Json, Dummy.serializer()), globalHeaders, exceptionMapper
+    baseUrl,
+    mockHttpClient(mockEngine),
+    SerializedNetworkResponseDecoder(Json, Dummy.serializer()),
+    globalHeaders,
+    exceptionMapper,
   )
 }

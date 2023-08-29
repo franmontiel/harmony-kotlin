@@ -25,7 +25,7 @@ class CacheSQLStorageDataSourceTests : BaseTest() {
   fun `should return value when exist`() = runTest {
     val expectedValue = anyInsertionValue(value = randomByteArray())
     val cacheSQLStorageDataSource = givenCacheSQLStorageDataSource(
-      putValues = listOf(expectedValue)
+      putValues = listOf(expectedValue),
     )
 
     val value = cacheSQLStorageDataSource.get(expectedValue.query)
@@ -88,7 +88,7 @@ class CacheSQLStorageDataSourceTests : BaseTest() {
   fun `should update value when exist`() = runTest {
     val insertedValue = anyByteArrayInsertionValue()
     val cacheSQLStorageDataSource = givenCacheSQLStorageDataSource(
-      putValues = listOf(insertedValue)
+      putValues = listOf(insertedValue),
     )
 
     val valueToUpdate = randomByteArray()
@@ -117,7 +117,7 @@ class CacheSQLStorageDataSourceTests : BaseTest() {
     val elementOne = anyByteArrayInsertionValue()
     val elementTwo = anyByteArrayInsertionValue()
     val cacheSQLStorageDataSource = givenCacheSQLStorageDataSource(
-      putValues = listOf(elementOne, elementTwo)
+      putValues = listOf(elementOne, elementTwo),
     )
 
     cacheSQLStorageDataSource.delete(AllObjectsQuery())

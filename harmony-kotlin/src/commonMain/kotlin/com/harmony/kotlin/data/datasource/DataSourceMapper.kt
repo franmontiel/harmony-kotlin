@@ -17,7 +17,7 @@ class DataSourceMapper<In, Out>(
   private val putDataSource: PutDataSource<In>,
   private val deleteDataSource: DeleteDataSource,
   private val toOutMapper: Mapper<In, Out>,
-  private val toInMapper: Mapper<Out, In>
+  private val toInMapper: Mapper<Out, In>,
 ) : GetDataSource<Out>, PutDataSource<Out>, DeleteDataSource {
 
   override suspend fun get(query: Query): Out = get(getDataSource, toOutMapper, query)
@@ -29,7 +29,7 @@ class DataSourceMapper<In, Out>(
 
 class GetDataSourceMapper<In, Out>(
   private val getDataSource: GetDataSource<In>,
-  private val toOutMapper: Mapper<In, Out>
+  private val toOutMapper: Mapper<In, Out>,
 ) : GetDataSource<Out> {
 
   override suspend fun get(query: Query): Out = get(getDataSource, toOutMapper, query)
@@ -38,7 +38,7 @@ class GetDataSourceMapper<In, Out>(
 class PutDataSourceMapper<In, Out>(
   private val putDataSource: PutDataSource<In>,
   private val toOutMapper: Mapper<In, Out>,
-  private val toInMapper: Mapper<Out, In>
+  private val toInMapper: Mapper<Out, In>,
 ) : PutDataSource<Out> {
 
   override suspend fun put(query: Query, value: Out?): Out = put(putDataSource, toOutMapper, toInMapper, value, query)
@@ -47,7 +47,7 @@ class PutDataSourceMapper<In, Out>(
 private suspend fun <In, Out> get(
   getDataSource: GetDataSource<In>,
   toOutMapper: Mapper<In, Out>,
-  query: Query
+  query: Query,
 ): Out = getDataSource.get(query).let { toOutMapper.map(it) }
 
 private suspend fun <In, Out> put(
@@ -55,7 +55,7 @@ private suspend fun <In, Out> put(
   toOutMapper: Mapper<In, Out>,
   toInMapper: Mapper<Out, In>,
   value: Out?,
-  query: Query
+  query: Query,
 ): Out {
   val mapped = value?.let { toInMapper.map(it) }
   return putDataSource.put(query, mapped).let {

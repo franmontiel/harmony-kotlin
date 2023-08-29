@@ -182,9 +182,13 @@ class CacheRepositoryTests : BaseTest() {
       val cacheDataSourceMapper = DataSourceMapper(cacheDataSource, cacheDataSource, cacheDataSource, mockMapper, mockMapper)
       val mainDataSource = anyInMemoryDataSourceLegacy(putValues = listOf(expectedValue))
       val cacheRepository = CacheRepository(
-        cacheDataSourceMapper, cacheDataSourceMapper, cacheDataSourceMapper,
-        mainDataSource, mainDataSource, mainDataSource,
-        anyMockValidator()
+        cacheDataSourceMapper,
+        cacheDataSourceMapper,
+        cacheDataSourceMapper,
+        mainDataSource,
+        mainDataSource,
+        mainDataSource,
+        anyMockValidator(),
       )
 
       val value = cacheRepository.get(expectedValue.query, CacheSyncOperation())
@@ -200,9 +204,13 @@ class CacheRepositoryTests : BaseTest() {
       val mainDataSource = anyVoidDataSource<String>()
       val cacheDataSource = anyVoidDataSource<String>()
       val cacheRepository = CacheRepository(
-        cacheDataSource, cacheDataSource, cacheDataSource,
-        mainDataSource, mainDataSource, mainDataSource,
-        MockValidator(true)
+        cacheDataSource,
+        cacheDataSource,
+        cacheDataSource,
+        mainDataSource,
+        mainDataSource,
+        mainDataSource,
+        MockValidator(true),
       )
 
       assertFailsWith<UnsupportedOperationException> {
@@ -382,14 +390,18 @@ class CacheRepositoryTests : BaseTest() {
   private fun <T> givenCacheRepository(
     main: InMemoryDataSource<T>? = null,
     cache: InMemoryDataSource<T>? = null,
-    validator: Validator<T> = anyMockValidator()
+    validator: Validator<T> = anyMockValidator(),
   ): CacheRepository<T> {
     val mainDataSource = main ?: InMemoryDataSource()
     val cacheDataSource = cache ?: InMemoryDataSource()
     return CacheRepository(
-      cacheDataSource, cacheDataSource, cacheDataSource,
-      mainDataSource, mainDataSource, mainDataSource,
-      validator
+      cacheDataSource,
+      cacheDataSource,
+      cacheDataSource,
+      mainDataSource,
+      mainDataSource,
+      mainDataSource,
+      validator,
     )
   }
 }

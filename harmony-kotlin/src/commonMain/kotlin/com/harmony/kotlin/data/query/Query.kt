@@ -16,4 +16,4 @@ open class ObjectsQuery<out T>(val values: Collection<T>) : Query()
 open class AllObjectsQuery : Query()
 
 // Key value queries
-open class KeyQuery(val key: String /* key associated to the query */) : Query()
+open class KeyQuery(val key: String) : Query()

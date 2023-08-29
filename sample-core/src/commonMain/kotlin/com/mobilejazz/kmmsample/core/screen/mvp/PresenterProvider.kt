@@ -15,13 +15,13 @@ interface PresenterComponent {
 
 class PresenterDefaultModule(
   private val logger: Logger,
-  private val hackerNewsPostsComponent: HackerNewsPostsComponent
+  private val hackerNewsPostsComponent: HackerNewsPostsComponent,
 ) : PresenterComponent {
   override fun getHackerPostsPresenter(view: HackerPostsPresenter.View): HackerPostsPresenter {
     return HackerPostsDefaultPresenter(
       PresenterViewHolder(view),
       hackerNewsPostsComponent.getHackerNewsPostsInteractor(),
-      logger
+      logger,
     )
   }
 
@@ -29,7 +29,7 @@ class PresenterDefaultModule(
     return HackerPostDetailDefaultPresenter(
       PresenterViewHolder(view),
       hackerNewsPostsComponent.getHackerNewsPostInteractor(),
-      logger
+      logger,
     )
   }
 }

@@ -32,7 +32,7 @@ open class OAuthNetworkQuery(
   urlParams = urlParams,
   headers = headers,
   suspendHeaders = suspendHeaders,
-  key = key
+  key = key,
 ),
   GenericOAuthQuery
 
@@ -50,7 +50,7 @@ open class NetworkQuery(
   val urlParams: List<Pair<String, String>> = emptyList(),
   val headers: List<Pair<String, String>> = emptyList(),
   val suspendHeaders: suspend () -> List<Pair<String, String>> = { emptyList() },
-  key: String? = null
+  key: String? = null,
 ) : KeyQuery(key ?: generateNetworkQueryKey(method, path, urlParams)) {
 
   /**

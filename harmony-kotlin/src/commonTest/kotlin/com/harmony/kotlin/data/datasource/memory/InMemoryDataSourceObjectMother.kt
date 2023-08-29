@@ -16,7 +16,7 @@ suspend fun <T> anyInMemoryDataSourceLegacy(
 }
 
 suspend fun <T> anyInMemoryDataSource(
-  putValues: List<InsertionValue<T>> = emptyList()
+  putValues: List<InsertionValue<T>> = emptyList(),
 ): InMemoryDataSource<T> {
   val inMemoryDataSource = InMemoryDataSource<T>()
 
@@ -28,7 +28,7 @@ suspend fun <T> anyInMemoryDataSource(
 }
 
 suspend fun <T> anyInMemoryDataSourceList(
-  putValues: List<InsertionValues<T>> = emptyList()
+  putValues: List<InsertionValues<T>> = emptyList(),
 ): InMemoryDataSource<List<T>> {
   val inMemoryDataSource = InMemoryDataSource<List<T>>()
 

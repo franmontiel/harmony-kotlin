@@ -20,7 +20,7 @@ class FlowRepositoryMapper<In, Out>(
   private val putRepository: FlowPutRepository<In>,
   private val deleteRepository: FlowDeleteRepository,
   private val toOutMapper: Mapper<In, Out>,
-  private val toInMapper: Mapper<Out, In>
+  private val toInMapper: Mapper<Out, In>,
 ) : FlowGetRepository<Out>, FlowPutRepository<Out>, FlowDeleteRepository {
 
   override fun get(query: Query, operation: Operation): Flow<Out> = getRepository.get(query, operation).map { toOutMapper.map(it) }
@@ -37,7 +37,7 @@ class FlowRepositoryMapper<In, Out>(
 
 class FlowGetRepositoryMapper<In, Out>(
   private val getRepository: FlowGetRepository<In>,
-  private val toOutMapper: Mapper<In, Out>
+  private val toOutMapper: Mapper<In, Out>,
 ) : FlowGetRepository<Out> {
 
   override fun get(query: Query, operation: Operation): Flow<Out> = getRepository.get(query, operation).map { it.let { toOutMapper.map(it) } }
@@ -46,7 +46,7 @@ class FlowGetRepositoryMapper<In, Out>(
 class FlowPutRepositoryMapper<In, Out>(
   private val putRepository: FlowPutRepository<In>,
   private val toOutMapper: Mapper<In, Out>,
-  private val toInMapper: Mapper<Out, In>
+  private val toInMapper: Mapper<Out, In>,
 ) : FlowPutRepository<Out> {
 
   override fun put(query: Query, value: Out?, operation: Operation): Flow<Out> {

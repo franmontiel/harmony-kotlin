@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 class SingleFlowDataSourceRepository<T>(
   private val getDataSource: FlowGetDataSource<T>,
   private val putDataSource: FlowPutDataSource<T>,
-  private val deleteDataSource: FlowDeleteDataSource
+  private val deleteDataSource: FlowDeleteDataSource,
 ) : FlowGetRepository<T>, FlowPutRepository<T>, FlowDeleteRepository {
 
   override fun get(query: Query, operation: Operation): Flow<T> = getDataSource.get(query)

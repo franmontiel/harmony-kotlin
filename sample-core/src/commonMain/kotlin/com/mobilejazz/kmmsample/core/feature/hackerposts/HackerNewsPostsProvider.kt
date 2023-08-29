@@ -41,21 +41,21 @@ class HackerNewsPostsDefaultModule(
   private val networkConfiguration: NetworkConfiguration,
   private val coroutineDispatcher: CoroutineDispatcher,
   private val cacheSQLConfiguration: CacheSQLConfiguration,
-  private val cbor: Cbor
+  private val cbor: Cbor,
 ) : HackerNewsPostsComponent {
 
   override fun getHackerNewsPostsInteractor(): GetHackerNewsPostsInteractor {
     return GetHackerNewsPostsInteractor(
       coroutineDispatcher,
       getHackerNewsIdsPostsRepository.toGetInteractor(coroutineDispatcher),
-      getHackerNewsPostsRepository.toGetInteractor(coroutineDispatcher)
+      getHackerNewsPostsRepository.toGetInteractor(coroutineDispatcher),
     )
   }
 
   override fun getHackerNewsPostInteractor(): GetHackerNewsPostInteractor {
     return GetHackerNewsPostInteractor(
       coroutineDispatcher,
-      getHackerNewsPostsRepository.toGetInteractor(coroutineDispatcher)
+      getHackerNewsPostsRepository.toGetInteractor(coroutineDispatcher),
     )
   }
 
@@ -65,8 +65,8 @@ class HackerNewsPostsDefaultModule(
       networkConfiguration.httpClient,
       SerializedNetworkResponseDecoder(
         networkConfiguration.json,
-        ListSerializer(Long.serializer())
-      )
+        ListSerializer(Long.serializer()),
+      ),
     )
 
     val hackerNewsQueryToNetworkQueryMapper = HackerNewsQueryToNetworkQueryMapper()
@@ -90,8 +90,8 @@ class HackerNewsPostsDefaultModule(
       networkConfiguration.httpClient,
       SerializedNetworkResponseDecoder(
         networkConfiguration.json,
-        HackerNewsPostEntity.serializer()
-      )
+        HackerNewsPostEntity.serializer(),
+      ),
     )
 
     val hackerNewsQueryToNetworkQuery = HackerNewsQueryToNetworkQueryMapper()
@@ -102,7 +102,7 @@ class HackerNewsPostsDefaultModule(
       VoidDeleteDataSource(),
       hackerNewsQueryToNetworkQuery,
       hackerNewsQueryToNetworkQuery,
-      hackerNewsQueryToNetworkQuery
+      hackerNewsQueryToNetworkQuery,
     )
 
     val cacheSQLStorageDataSource = CacheSQLStorageDataSource(cacheSQLConfiguration.provideCacheDatabase("hacker-news-post"))
@@ -112,7 +112,7 @@ class HackerNewsPostsDefaultModule(
       cacheSQLStorageDataSource,
       cacheSQLStorageDataSource,
       CBORByteArrayToObject(cbor, HackerNewsPostEntity.serializer()),
-      CBORObjectToByteArray(cbor, HackerNewsPostEntity.serializer())
+      CBORObjectToByteArray(cbor, HackerNewsPostEntity.serializer()),
     )
 
     val repository = CacheRepository(
@@ -123,8 +123,8 @@ class HackerNewsPostsDefaultModule(
       VoidPutDataSource(),
       VoidDeleteDataSource(),
       VastraValidator(
-        ValidationServiceManager(listOf(TimestampValidationStrategy()))
-      )
+        ValidationServiceManager(listOf(TimestampValidationStrategy())),
+      ),
     )
 
     repository.withMapping(HackerNewsPostEntityToHackerNewsPostMapper())

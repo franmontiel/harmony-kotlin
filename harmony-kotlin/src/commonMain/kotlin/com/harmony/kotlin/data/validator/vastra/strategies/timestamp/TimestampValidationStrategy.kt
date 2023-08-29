@@ -29,10 +29,11 @@ class TimestampValidationStrategy : ValidationStrategy {
 
         val isValid = difSeconds < t.expireIn
 
-        return if (isValid)
+        return if (isValid) {
           ValidationStrategyResult.VALID
-        else
+        } else {
           ValidationStrategyResult.INVALID
+        }
       }
       else -> {
         throw IllegalArgumentException("object != TimestampValidationEntity")

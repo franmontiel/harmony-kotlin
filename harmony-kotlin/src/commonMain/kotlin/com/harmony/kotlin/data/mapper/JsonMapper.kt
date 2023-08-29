@@ -10,7 +10,7 @@ import kotlinx.serialization.json.Json
  */
 class ModelToJsonStringMapper<in T>(
   private val serializer: KSerializer<T>,
-  private val json: Json = Json
+  private val json: Json = Json,
 ) : Mapper<T, String> {
   override fun map(from: T): String = try {
     json.encodeToString(serializer, from)
@@ -24,7 +24,7 @@ class ModelToJsonStringMapper<in T>(
  */
 class JsonStringToModelMapper<out T>(
   private val serializer: KSerializer<T>,
-  private val json: Json = Json
+  private val json: Json = Json,
 ) : Mapper<String, T> {
   override fun map(from: String): T = try {
     json.decodeFromString(serializer, from)

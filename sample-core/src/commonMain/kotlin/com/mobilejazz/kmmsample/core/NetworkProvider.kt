@@ -14,7 +14,7 @@ import kotlinx.serialization.json.Json
 data class NetworkConfiguration(
   val httpClient: HttpClient,
   val json: Json,
-  val baseUrl: String
+  val baseUrl: String,
 )
 
 interface NetworkComponent {

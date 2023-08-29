@@ -8,7 +8,7 @@ import kotlin.coroutines.CoroutineContext
 
 class AuthenticatePasswordCredentialInteractor(
   private val putToken: PutInteractor<OAuthToken>,
-  private val coroutineContext: CoroutineContext
+  private val coroutineContext: CoroutineContext,
 ) {
 
   suspend operator fun invoke(id: String?, username: String, password: String): OAuthToken {

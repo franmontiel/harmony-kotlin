@@ -88,7 +88,7 @@ class DeleteNetworkDataSourceTest : BaseTest() {
     }
     val contentTypeQuery = NetworkQuery(
       NetworkQuery.Method.Delete,
-      pathUrl
+      pathUrl,
     )
     val deleteNetworkDataSource = givenDeleteNetworkDataSource(mockEngine)
 
@@ -131,9 +131,10 @@ class DeleteNetworkDataSourceTest : BaseTest() {
     val suspendHeaders = anyHeaders()
     val deleteNetworkDataSource = givenDeleteNetworkDataSource(mockEngine, globalHeaders)
     val contentTypeQuery = NetworkQuery(
-      NetworkQuery.Method.Delete, pathUrl,
+      NetworkQuery.Method.Delete,
+      pathUrl,
       headers = queryHeaders,
-      suspendHeaders = { suspendHeaders }
+      suspendHeaders = { suspendHeaders },
     )
 
     deleteNetworkDataSource.delete(contentTypeQuery)
@@ -157,7 +158,8 @@ class DeleteNetworkDataSourceTest : BaseTest() {
     mocker.everySuspending { getPasswordTokenInteractor(isAny()) } returns fakeToken
     val contentTypeQuery = OAuthNetworkQuery(
       getPasswordTokenInteractor,
-      NetworkQuery.Method.Delete, pathUrl
+      NetworkQuery.Method.Delete,
+      pathUrl,
     )
     val deleteNetworkDataSource = givenDeleteNetworkDataSource(mockEngine)
 
@@ -189,7 +191,7 @@ class DeleteNetworkDataSourceTest : BaseTest() {
   private fun mockHttpClient(
     mockEngine: MockEngine = MockEngine {
       respondOk()
-    }
+    },
   ) = HttpClient(mockEngine) {
     install(ContentNegotiation)
   }
@@ -211,10 +213,13 @@ class DeleteNetworkDataSourceTest : BaseTest() {
       respondOk()
     },
     globalHeaders: List<Pair<String, String>> = emptyList(),
-    exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
+    exceptionMapper: Mapper<Exception, Exception> = IdentityMapper(),
   ): DeleteNetworkDataSource {
     return DeleteNetworkDataSource(
-      baseUrl, mockHttpClient(mockEngine), globalHeaders, exceptionMapper
+      baseUrl,
+      mockHttpClient(mockEngine),
+      globalHeaders,
+      exceptionMapper,
     )
   }
 }

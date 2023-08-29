@@ -22,17 +22,17 @@ fun FullErrorView(errorUI: ErrorUI, modifier: Modifier = Modifier) {
   Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
     Column(
       modifier = Modifier.fillMaxWidth(),
-      horizontalAlignment = Alignment.CenterHorizontally
+      horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       Text(text = errorUI.message)
       errorUI.retryButton?.let {
         Button(
           onClick = { it.onClick() },
-          modifier = Modifier.padding(vertical = 16.dp)
+          modifier = Modifier.padding(vertical = 16.dp),
         ) {
           Text(
             text = it.text,
-            modifier = Modifier.padding(horizontal = 8.dp)
+            modifier = Modifier.padding(horizontal = 8.dp),
           )
         }
       }

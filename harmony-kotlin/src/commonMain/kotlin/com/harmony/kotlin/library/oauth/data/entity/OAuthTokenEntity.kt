@@ -11,7 +11,7 @@ internal data class OAuthTokenEntity(
   @SerialName("expires_in") val expiresIn: Long,
   @SerialName("refresh_token") val refreshToken: String? = null,
   @SerialName("scope") val scopes: List<String>,
-  val createdAt: Long = Clock.System.now().toEpochMilliseconds()
+  val createdAt: Long = Clock.System.now().toEpochMilliseconds(),
 ) {
 
   companion object {

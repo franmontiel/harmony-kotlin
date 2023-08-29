@@ -23,7 +23,7 @@ sealed class HackerPostDetailViewState : ViewState {
 class HackerPostDetailViewModel(
   private val postId: Long,
   private val getPostInteractor: GetHackerNewsPostInteractor,
-  private val logger: Logger
+  private val logger: Logger,
 ) : ViewModel<HackerPostDetailViewState, HackerPostDetailAction>() {
 
   private val _viewState: MutableStateFlow<HackerPostDetailViewState> = MutableStateFlow(HackerPostDetailViewState.Loading)
@@ -36,14 +36,13 @@ class HackerPostDetailViewModel(
   private fun loadPost() {
     _viewState.value = HackerPostDetailViewState.Loading
     launch {
-
       getPostInteractor(postId).fold(
         ifLeft = {
           _viewState.value = HackerPostDetailViewState.Error("Error happened")
         },
         ifRight = {
           _viewState.value = HackerPostDetailViewState.Content(it)
-        }
+        },
       )
     }
   }

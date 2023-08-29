@@ -11,7 +11,7 @@ fun HttpRequestBuilder.headers(values: List<Pair<String, String>>) {
 
 suspend fun HttpRequestBuilder.oauthPasswordHeader(
   tokenIdentifier: String = Default.TOKEN_IDENTIFIER,
-  getPasswordTokenInteractor: GetPasswordTokenInteractor
+  getPasswordTokenInteractor: GetPasswordTokenInteractor,
 ) {
   try {
     val passwordTokenInteractor = getPasswordTokenInteractor(tokenIdentifier)

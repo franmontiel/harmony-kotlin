@@ -41,7 +41,7 @@ abstract class ViewModel<out VS : ViewState, in A : Action>(private val dispatch
     onEach {
       onChange(it)
     }.launchIn(
-      CoroutineScope(coroutineContext)
+      CoroutineScope(coroutineContext),
     )
   }
 }

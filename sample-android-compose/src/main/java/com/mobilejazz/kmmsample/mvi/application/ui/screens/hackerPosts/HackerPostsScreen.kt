@@ -44,7 +44,7 @@ import kotlinx.datetime.toLocalDateTime
 @Composable
 fun HackerPostsScreen(
   navigator: DestinationsNavigator,
-  viewModel: HackerPostsViewModel = viewModel(factory = ViewModelFactory.HackerPosts)
+  viewModel: HackerPostsViewModel = viewModel(factory = ViewModelFactory.HackerPosts),
 ) {
   Scaffold(topBar = {
     TopAppBar(title = { Text(stringResource(id = R.string.hacker_news)) })
@@ -68,8 +68,8 @@ fun HackerPostsScreen(
               message = viewState.message,
               retryButton = ErrorUI.RetryButton {
                 viewModel.onAction(action = HackerPostsAction.Refresh)
-              }
-            )
+              },
+            ),
           )
       }
     }
@@ -86,15 +86,15 @@ fun HackerPostsView(hackerNewsPosts: HackerNewsPosts, onPostClick: ((post: Hacke
         modifier = Modifier
           .clickable { onPostClick(post) }
           .fillParentMaxWidth()
-          .padding(16.dp)
+          .padding(16.dp),
       ) {
         Text(
           text = post.time.toString(),
-          style = MaterialTheme.typography.overline
+          style = MaterialTheme.typography.overline,
         )
         Text(
           text = post.title,
-          style = MaterialTheme.typography.h6
+          style = MaterialTheme.typography.h6,
         )
       }
     }
@@ -115,7 +115,7 @@ fun HackerPostsPreview() {
         Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
         "Old man yells at cloud",
         null,
-        null
+        null,
       ),
       HackerNewsPost(
         2,
@@ -126,9 +126,9 @@ fun HackerPostsPreview() {
         Clock.System.now().minus(1, DateTimeUnit.DAY, TimeZone.currentSystemDefault()).toLocalDateTime(TimeZone.currentSystemDefault()),
         "Human blimp sees flying saucer",
         null,
-        null
-      )
+        null,
+      ),
     ),
-    onPostClick = {}
+    onPostClick = {},
   )
 }

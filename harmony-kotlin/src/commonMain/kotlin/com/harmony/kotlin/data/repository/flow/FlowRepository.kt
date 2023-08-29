@@ -23,6 +23,7 @@ interface FlowDeleteRepository {
 fun <K, V> FlowGetRepository<K>.withMapping(mapper: Mapper<K, V>): FlowGetRepository<V> = FlowGetRepositoryMapper(this, mapper)
 
 fun <K, V> FlowPutRepository<K>.withMapping(toMapper: Mapper<K, V>, fromMapper: Mapper<V, K>): FlowPutRepository<V> = FlowPutRepositoryMapper(
-  this, toMapper,
-  fromMapper
+  this,
+  toMapper,
+  fromMapper,
 )

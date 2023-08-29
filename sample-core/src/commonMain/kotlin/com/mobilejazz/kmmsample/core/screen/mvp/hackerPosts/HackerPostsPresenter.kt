@@ -23,7 +23,7 @@ interface HackerPostsPresenter {
 class HackerPostsDefaultPresenter(
   private val view: PresenterViewHolder<HackerPostsPresenter.View>,
   private val getHackerNewsPostsInteractor: GetHackerNewsPostsInteractor,
-  private val logger: Logger
+  private val logger: Logger,
 ) : HackerPostsPresenter, CoroutineScope {
 
   private val tag = "HackerPostsDefaultPresenter"
@@ -46,7 +46,7 @@ class HackerPostsDefaultPresenter(
         },
         ifLeft = {
           view.get()?.onFailedWithFullScreenError(it, retryBlock = { loadPosts() })
-        }
+        },
       )
     }
   }

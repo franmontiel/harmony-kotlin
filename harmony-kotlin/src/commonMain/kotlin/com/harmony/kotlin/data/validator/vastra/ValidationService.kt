@@ -24,7 +24,8 @@ interface ValidationService {
           isValid = false
           break@loop
         }
-        else -> { /*result is ValidationStrategyResult.UNKNOWN, lets iterate to next strategy */
+        else -> {
+          /*result is ValidationStrategyResult.UNKNOWN, lets iterate to next strategy */
         }
       }
     }

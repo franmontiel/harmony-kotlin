@@ -14,7 +14,7 @@ import com.harmony.kotlin.library.oauth.data.query.OAuthQuery
 internal class OAuthTokenRepository(
   private val putNetworkDataSource: PutDataSource<OAuthTokenEntity>,
   private val getStorageDataSource: GetDataSource<OAuthTokenEntity>,
-  private val putStorageDataSource: PutDataSource<OAuthTokenEntity>
+  private val putStorageDataSource: PutDataSource<OAuthTokenEntity>,
 ) : GetRepository<OAuthTokenEntity>, PutRepository<OAuthTokenEntity> {
 
   override suspend fun get(query: Query, operation: Operation): OAuthTokenEntity {

@@ -45,27 +45,29 @@ import kotlinx.datetime.toLocalDateTime
 fun HackerPostDetailScreen(
   hackerPostId: Long,
   navigator: DestinationsNavigator,
-  viewModel: HackerPostDetailViewModel = viewModel(factory = ViewModelFactory.HackerPostDetail(hackerPostId))
+  viewModel: HackerPostDetailViewModel = viewModel(factory = ViewModelFactory.HackerPostDetail(hackerPostId)),
 ) {
-  Scaffold(topBar = {
-    TopAppBar(
-      title = { Text(stringResource(id = R.string.hacker_news)) },
-      navigationIcon = {
-        IconButton(onClick = { navigator.navigateUp() }) {
-          Icon(
-            imageVector = Icons.Filled.ArrowBack,
-            contentDescription = null
-          )
-        }
-      }
-    )
-  }) { padding ->
+  Scaffold(
+    topBar = {
+      TopAppBar(
+        title = { Text(stringResource(id = R.string.hacker_news)) },
+        navigationIcon = {
+          IconButton(onClick = { navigator.navigateUp() }) {
+            Icon(
+              imageVector = Icons.Filled.ArrowBack,
+              contentDescription = null,
+            )
+          }
+        },
+      )
+    },
+  ) { padding ->
     BoxWithConstraints {
       Box(
         modifier = Modifier
           .padding(padding)
           .fillMaxSize()
-          .verticalScroll(rememberScrollState())
+          .verticalScroll(rememberScrollState()),
       ) {
         when (val viewState = viewModel.viewState.collectAsStateLifecycleAware().value) {
           is HackerPostDetailViewState.Loading -> FullLoadingView(modifier = Modifier.height(this@BoxWithConstraints.maxHeight))
@@ -76,8 +78,8 @@ fun HackerPostDetailScreen(
                 message = viewState.message,
                 retryButton = ErrorUI.RetryButton {
                   viewModel.onAction(action = HackerPostDetailAction.Refresh)
-                }
-              )
+                },
+              ),
             )
         }
       }
@@ -94,13 +96,13 @@ fun HackerPostView(
       text = hackerNewsPost.time.toString(),
       style = MaterialTheme.typography.overline,
       modifier = Modifier.fillMaxWidth(),
-      textAlign = TextAlign.Center
+      textAlign = TextAlign.Center,
     )
     Text(
       text = hackerNewsPost.title,
       style = MaterialTheme.typography.h6,
       modifier = Modifier.fillMaxWidth(),
-      textAlign = TextAlign.Center
+      textAlign = TextAlign.Center,
     )
     Text(
       text = stringResource(id = R.string.ls_author, hackerNewsPost.by),
@@ -108,13 +110,13 @@ fun HackerPostView(
       modifier = Modifier
         .fillMaxWidth()
         .padding(bottom = 16.dp),
-      textAlign = TextAlign.Center
+      textAlign = TextAlign.Center,
     )
     Text(
       text = stringResource(id = R.string.ls_lorem),
       style = MaterialTheme.typography.body1,
       modifier = Modifier.fillMaxWidth(),
-      textAlign = TextAlign.Left
+      textAlign = TextAlign.Left,
     )
   }
 }
@@ -132,7 +134,7 @@ fun HackerPostDetailPreview() {
       Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
       "Old man yells at cloud",
       null,
-      null
+      null,
     ),
   )
 }

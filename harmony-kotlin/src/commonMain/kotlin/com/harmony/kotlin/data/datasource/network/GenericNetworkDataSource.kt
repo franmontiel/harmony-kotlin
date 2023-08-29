@@ -16,7 +16,7 @@ class GetNetworkDataSource<T>(
   private val httpClient: HttpClient,
   private val networkResponseDecoder: NetworkResponseDecoder<T>,
   private val globalHeaders: List<Pair<String, String>> = emptyList(),
-  private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
+  private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper(),
 ) : GetDataSource<T> {
 
   /**
@@ -47,7 +47,7 @@ class PutNetworkDataSource<T>(
   private val httpClient: HttpClient,
   private val networkResponseDecoder: NetworkResponseDecoder<T>,
   private val globalHeaders: List<Pair<String, String>> = emptyList(),
-  private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
+  private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper(),
 
 ) : PutDataSource<T> {
 
@@ -78,7 +78,7 @@ class PutNetworkDataSource<T>(
         "Conflicting arguments to be used as request body:\n" +
           "query.method.contentType=${contentType}\n" +
           "value=${value}\n" +
-          "You must only provide one of them"
+          "You must only provide one of them",
       )
     }
     // Updating query if value is passed as separated argument from the query
@@ -106,7 +106,7 @@ class DeleteNetworkDataSource(
   private val url: String,
   private val httpClient: HttpClient,
   private val globalHeaders: List<Pair<String, String>> = emptyList(),
-  private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper()
+  private val exceptionMapper: Mapper<Exception, Exception> = IdentityMapper(),
 ) : DeleteDataSource {
 
   /**

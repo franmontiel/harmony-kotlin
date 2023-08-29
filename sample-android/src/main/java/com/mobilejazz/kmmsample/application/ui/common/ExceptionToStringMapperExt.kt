@@ -9,5 +9,5 @@ fun Throwable.toLocalizedErrorMessage(context: Context) =
     when (this) {
       is NetworkConnectivityException -> R.string.ls_generic_connectivity_error_message
       else -> R.string.ls_generic_error_message
-    }
+    },
   )

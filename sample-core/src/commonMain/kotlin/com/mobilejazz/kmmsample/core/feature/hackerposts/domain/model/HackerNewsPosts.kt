@@ -13,5 +13,5 @@ data class HackerNewsPost(
   val time: LocalDateTime,
   val title: String,
   val type: String?,
-  val url: String?
+  val url: String?,
 )

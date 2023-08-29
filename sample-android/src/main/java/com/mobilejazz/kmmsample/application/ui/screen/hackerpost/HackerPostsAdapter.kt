@@ -15,7 +15,7 @@ import java.util.Locale
 
 class HackerPostsAdapter(
   private val dataSet: List<HackerNewsPost>,
-  private val onItemClicked: (HackerNewsPost) -> Unit
+  private val onItemClicked: (HackerNewsPost) -> Unit,
 ) :
   RecyclerView.Adapter<HackerPostsAdapter.ViewHolder>() {
   private val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())

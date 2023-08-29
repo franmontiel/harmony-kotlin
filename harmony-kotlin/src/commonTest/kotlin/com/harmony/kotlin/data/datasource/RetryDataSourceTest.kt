@@ -37,8 +37,10 @@ class RetryDataSourceTest : BaseTest() {
 
     try {
       DataSourceRetrier(
-        getDataSource, VoidDataSource(), VoidDataSource<Unit>(),
-        maxAmountOfExecutions = randomInt(max = 0)
+        getDataSource,
+        VoidDataSource(),
+        VoidDataSource<Unit>(),
+        maxAmountOfExecutions = randomInt(max = 0),
       )
     } catch (illegalStateException: IllegalStateException) {
       exception = illegalStateException
@@ -69,8 +71,11 @@ class RetryDataSourceTest : BaseTest() {
     var callCounter = 0
     mocker.everySuspending { getDataSource.get(isAny()) } runs {
       callCounter++
-      if (callCounter == 1) throw DataNotFoundException()
-      else expectedResponse
+      if (callCounter == 1) {
+        throw DataNotFoundException()
+      } else {
+        expectedResponse
+      }
     }
     val dataSourceRetrier = DataSourceRetrier(getDataSource, VoidDataSource(), VoidDataSource<Unit>(), maxAmountOfExecutions = ANY_ITEMS_COUNT)
 
@@ -89,7 +94,7 @@ class RetryDataSourceTest : BaseTest() {
       putDataSource,
       VoidDataSource<Unit>(),
       maxAmountOfExecutions = ANY_ITEMS_COUNT,
-      logger = ConsoleLogger()
+      logger = ConsoleLogger(),
     )
     var catchException: Exception? = null
 
@@ -110,15 +115,19 @@ class RetryDataSourceTest : BaseTest() {
       deleteDataSource.delete(isAny())
     } runs {
       callCounter++
-      if (callCounter == 1) throw AnyException("first exception")
-      else throw dataException
+      if (callCounter == 1) {
+        throw AnyException("first exception")
+      } else {
+        throw dataException
+      }
     }
     val dataSourceRetrier = DataSourceRetrier<String>(
-      VoidDataSource(), VoidDataSource(),
+      VoidDataSource(),
+      VoidDataSource(),
       deleteDataSource,
       maxAmountOfExecutions = Int.MAX_VALUE,
       retryIf = { it !is DataNotFoundException },
-      logger = ConsoleLogger()
+      logger = ConsoleLogger(),
     )
 
     val catchException = assertFailsWith<DataNotFoundException> {
@@ -129,6 +138,6 @@ class RetryDataSourceTest : BaseTest() {
   }
 
   private data class AnyException(
-    override val message: String
+    override val message: String,
   ) : Exception()
 }

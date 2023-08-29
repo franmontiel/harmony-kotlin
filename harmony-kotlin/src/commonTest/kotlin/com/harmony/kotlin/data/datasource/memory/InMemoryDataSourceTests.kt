@@ -133,7 +133,7 @@ class InMemoryDataSourceTests : BaseTest() {
   }
 
   private suspend fun givenInMemoryDataSourceOfList(
-    insertValues: Pair<KeyQuery, List<String>>? = null
+    insertValues: Pair<KeyQuery, List<String>>? = null,
   ): InMemoryDataSource<List<String>> {
     val inMemoryDataSource = InMemoryDataSource<List<String>>()
 
