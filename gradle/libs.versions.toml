@@ -1,45 +1,47 @@
 [versions]
-kotlin = "1.8.0"
+arrowCore = "1.2.0"
+kotlin = "1.8.22"
 # Plugins
 androidGradlePlugin = "7.4.0"
 detekt = "1.22.0"
 gradleVersions = "0.44.0"
-ksp = "1.8.0-1.0.8"
-ktlint = "11.0.0"
+ksp = "1.8.22-1.0.11"
+ktlint = "11.5.1"
 taskTree = "2.1.1"
 versionCatalogUpdate = "0.7.0"
 # KMM
-coroutines = "1.6.4"
+coroutines = "1.7.3"
 datetime = "0.4.0"
-ktor = "2.2.2"
-serialization = "1.4.1"
+ktor = "2.2.4"
+serialization = "1.5.0"
 sqldelight = "1.5.5"
 uuidLib = "0.6.0"
 # Android
-activityCompose = "1.6.1"
-appCompat = "1.6.0"
+activityCompose = "1.7.2"
+appCompat = "1.6.1"
 bugfender = "3.1.0"
-compose = "1.3.3"
-composeCompiler = "1.4.0"
+compose = "1.5.0"
+composeCompiler = "1.4.8"
 composeDestinations = "1.7.32-beta"
-composeMaterial = "1.3.1"
+composeMaterial = "1.5.0"
 constraintLayout = "2.1.4"
 coordinatorLayout = "1.2.0"
-coreKtx = "1.9.0"
+coreKtx = "1.10.1"
 gson = "2.9.1"
-lifecycle = "2.5.1"
-material = "1.7.0"
+lifecycle = "2.6.1"
+material = "1.9.0"
 # Testing
 androidxJunitKtx = "1.1.5"
 androidxTest = "1.5.0"
 junit = "4.13.2"
-lifecycleRuntime = "2.5.1"
-mockk = "1.13.3"
+lifecycleRuntime = "2.6.1"
+mockk = "1.13.5"
 mockmp = "1.11.0"
 roboelectric = "4.9.2"
 
 [libraries]
 # KMM
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrowCore" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }

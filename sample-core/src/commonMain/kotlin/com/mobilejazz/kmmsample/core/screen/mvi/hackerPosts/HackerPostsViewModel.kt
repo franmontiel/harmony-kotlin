@@ -1,5 +1,6 @@
 package com.mobilejazz.kmmsample.core.screen.mvi.hackerPosts
 
+import arrow.core.raise.recover
 import com.harmony.kotlin.application.ui.mvi.Action
 import com.harmony.kotlin.application.ui.mvi.Navigation
 import com.harmony.kotlin.application.ui.mvi.OneShotEvent
@@ -23,7 +24,7 @@ sealed class HackerPostsViewState : ViewState {
   class Error(val message: String) : HackerPostsViewState()
   data class Content(
     val posts: HackerNewsPosts,
-    val navigation: OneShotEvent<HackerPostsNavigation> = OneShotEvent.Empty()
+    val navigation: OneShotEvent<HackerPostsNavigation> = OneShotEvent.Empty(),
   ) : HackerPostsViewState()
 }
 
@@ -33,7 +34,7 @@ sealed class HackerPostsNavigation : Navigation {
 
 class HackerPostsViewModel(
   private val getPostsInteractor: GetHackerNewsPostsInteractor,
-  private val logger: Logger
+  private val logger: Logger,
 ) : ViewModel<HackerPostsViewState, HackerPostsAction>() {
 
   private val _viewState: MutableStateFlow<HackerPostsViewState> = MutableStateFlow(HackerPostsViewState.Loading)
@@ -46,15 +47,11 @@ class HackerPostsViewModel(
   private fun loadPosts() {
     _viewState.value = HackerPostsViewState.Loading
     launch {
-
-      getPostsInteractor().fold(
-        ifLeft = {
-          _viewState.value = HackerPostsViewState.Error("Error happened")
-        },
-        ifRight = {
-          _viewState.value = HackerPostsViewState.Content(it)
-        }
-      )
+      recover({
+        _viewState.value = HackerPostsViewState.Content(getPostsInteractor().bind())
+      }) {
+        _viewState.value = HackerPostsViewState.Error("Error happened")
+      }
     }
   }
 
@@ -65,6 +62,7 @@ class HackerPostsViewModel(
           state.copy(navigation = OneShotEvent(HackerPostsNavigation.ToDetail(action.id)))
         }
       }
+
       HackerPostsAction.Refresh -> {
         loadPosts()
       }

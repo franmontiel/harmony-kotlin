@@ -1,6 +1,6 @@
 package com.mobilejazz.kmmsample.core.feature.hackerposts.domain.interactor
 
-import com.harmony.kotlin.common.either.Either
+import arrow.core.Either
 import com.harmony.kotlin.domain.interactor.either.GetInteractor
 import com.harmony.kotlin.error.HarmonyException
 import com.mobilejazz.kmmsample.core.feature.hackerposts.domain.HackerNewsQuery
@@ -10,7 +10,7 @@ import kotlin.coroutines.CoroutineContext
 
 class GetHackerNewsPostInteractor(
   private val coroutineContext: CoroutineContext,
-  private val getHackerNewsPostInteractor: GetInteractor<HackerNewsPost>
+  private val getHackerNewsPostInteractor: GetInteractor<HackerNewsPost>,
 ) {
 
   suspend operator fun invoke(hackerNewsPostId: Long): Either<HarmonyException, HackerNewsPost> {
