@@ -69,6 +69,7 @@ kotlin {
         api(libs.bundles.ktor)
         api(libs.datetime)
         implementation(libs.uuidLib)
+        api(libs.arrow.core)
       }
     }
     val commonTest by getting {
