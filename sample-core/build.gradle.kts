@@ -19,7 +19,7 @@ kotlin {
     }
   }
 
-  android()
+  androidTarget()
 
   iosX64()
   iosArm64()
@@ -54,7 +54,7 @@ kotlin {
         implementation(libs.ktor.okhttp)
       }
     }
-    val androidTest by getting {
+    val androidUnitTest by getting {
       dependencies {
         implementation(project(":harmony-kotlin"))
         implementation(kotlin("test-junit"))
@@ -91,10 +91,14 @@ kotlin {
 }
 
 android {
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
   compileSdk = android_target_sdk_version
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
   defaultConfig {
     minSdk = android_min_sdk_version
-    targetSdk = android_target_sdk_version
   }
+  namespace = "com.mobilejazz.kmmsample"
 }

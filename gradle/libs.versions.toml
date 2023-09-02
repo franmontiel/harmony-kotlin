@@ -1,33 +1,32 @@
 [versions]
 arrowCore = "1.2.0"
-kotlin = "1.8.22"
+kotlin = "1.9.10"
 # Plugins
-androidGradlePlugin = "7.4.0"
-detekt = "1.22.0"
-gradleVersions = "0.44.0"
-ksp = "1.8.22-1.0.11"
+androidGradlePlugin = "8.1.1"
+detekt = "1.23.1"
+gradleVersions = "0.47.0"
+ksp = "1.9.10-1.0.13"
 ktlint = "11.5.1"
 taskTree = "2.1.1"
-versionCatalogUpdate = "0.7.0"
+versionCatalogUpdate = "0.8.1"
 # KMM
 coroutines = "1.7.3"
 datetime = "0.4.0"
-ktor = "2.2.4"
-serialization = "1.5.0"
+ktor = "2.3.3"
+serialization = "1.6.0"
 sqldelight = "1.5.5"
-uuidLib = "0.6.0"
+uuidLib = "0.8.1"
 # Android
 activityCompose = "1.7.2"
 appCompat = "1.6.1"
-bugfender = "3.1.0"
+bugfender = "3.1.1"
 compose = "1.5.0"
-composeCompiler = "1.4.8"
-composeDestinations = "1.7.32-beta"
+composeCompiler = "1.5.3"
+composeDestinations = "1.9.52"
 composeMaterial = "1.5.0"
 constraintLayout = "2.1.4"
 coordinatorLayout = "1.2.0"
 coreKtx = "1.10.1"
-gson = "2.9.1"
 lifecycle = "2.6.1"
 material = "1.9.0"
 # Testing
@@ -35,9 +34,9 @@ androidxJunitKtx = "1.1.5"
 androidxTest = "1.5.0"
 junit = "4.13.2"
 lifecycleRuntime = "2.6.1"
-mockk = "1.13.5"
-mockmp = "1.11.0"
-roboelectric = "4.9.2"
+mockk = "1.13.7"
+mockmp = "1.15.0"
+roboelectric = "4.10.3"
 
 [libraries]
 # KMM
@@ -78,8 +77,6 @@ coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 lifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycleViewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
-# JVM
-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 # Testing
 androidTest-core = { module = "androidx.test:core", version.ref = "androidxTest" }
 androidTest-junitKtx = { module = "androidx.test.ext:junit-ktx", version.ref = "androidxJunitKtx" }

@@ -12,7 +12,11 @@ dependencies {
 }
 
 android {
-  packagingOptions {
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
+  packaging {
     resources.excludes.add("META-INF/licenses/**")
     resources.excludes.add("META-INF/AL2.0")
     resources.excludes.add("META-INF/LGPL2.1")
@@ -34,6 +38,7 @@ android {
   buildFeatures {
     viewBinding = true
   }
+  namespace = "com.mobilejazz.kmmsample.application"
 }
 
 tasks.preBuild {

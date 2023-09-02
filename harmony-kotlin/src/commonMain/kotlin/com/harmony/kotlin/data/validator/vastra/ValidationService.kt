@@ -6,6 +6,7 @@ import com.harmony.kotlin.data.validator.vastra.strategies.ValidationStrategyRes
 
 interface ValidationService {
 
+  @Suppress("LoopWithTooManyJumpStatements")
   fun <T : ValidationStrategyEntity> isValid(t: T?, strategies: List<ValidationStrategy>): Boolean {
     if (t == null) {
       return false

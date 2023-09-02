@@ -43,12 +43,12 @@ mockmp {
 
 kotlin {
   jvm()
-  android()
+  androidTarget()
   iosX64()
   iosArm64()
   iosSimulatorArm64() // sure all ios dependencies support this target
 
-  android {
+  androidTarget {
     publishLibraryVariants("release")
   }
 
@@ -83,9 +83,6 @@ kotlin {
     // Common code shared between JVM and Android
     val jvmAndroidCommon = create("jvmAndroidCommon") {
       dependsOn(commonMain)
-      dependencies {
-        implementation(libs.gson)
-      }
     }
 
     val jvmMain by getting {
@@ -122,7 +119,7 @@ kotlin {
       }
     }
 
-    val androidTest by getting {
+    val androidUnitTest by getting {
       dependencies {
         implementation(kotlin("test-junit"))
         implementation(libs.junit)
@@ -180,19 +177,32 @@ sqldelight {
 }
 
 android {
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+  }
 
   compileSdk = android_target_sdk_version
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
   defaultConfig {
     minSdk = android_min_sdk_version
-    targetSdk = android_target_sdk_version
   }
 
   testOptions {
     unitTests.isIncludeAndroidResources = true
   }
+  namespace = "com.harmony.kotlin"
 }
 
 tasks.check.dependsOn(tasks.ktlintCheck)
+
+tasks.configureEach {
+  if (name.contains("runKtlintCheckOverCommonTestSourceSet")) {
+    dependsOn("kspTestKotlinJvm")
+  }
+  if (name.contains("runKtlintFormatOverCommonTestSourceSet")) {
+    dependsOn("kspTestKotlinJvm")
+  }
+}
 
 apply(from = rootProject.file("git-hooks.gradle.kts"))
