@@ -14,7 +14,11 @@ protocol DependencyInjection {
 }
 
 class AppProvider: DependencyInjection {
-    lazy var shared: ApplicationComponent = ApplicationDefaultModule(coreLogger: IOSConsoleLogger())
+    lazy var shared: ApplicationComponent = ApplicationDefaultModule(
+        coreLogger: IOSConsoleLogger(),
+        cacheSQLConfiguration: CacheSQLNativeDefaultConfiguration()
+    )
+    
 }
 
 extension AppProvider {
