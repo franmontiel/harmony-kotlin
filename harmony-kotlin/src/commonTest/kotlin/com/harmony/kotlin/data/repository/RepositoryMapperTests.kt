@@ -9,6 +9,7 @@ import com.harmony.kotlin.data.mapper.VoidMapper
 import com.harmony.kotlin.data.mapper.anyVoidMapper
 import com.harmony.kotlin.data.operation.anyOperation
 import com.harmony.kotlin.data.query.anyQuery
+import kotlinx.coroutines.test.runTest
 import org.kodein.mock.Mocker
 import org.kodein.mock.UsesMocks
 import kotlin.test.BeforeTest
@@ -88,7 +89,7 @@ class RepositoryMapperTests : BaseTest() {
 }
 
 @UsesMocks(GetRepository::class, Mapper::class)
-class GetRepositoryMapperTests : BaseTest() {
+class GetRepositoryMapperTests {
 
   val mocker = Mocker()
 
@@ -121,7 +122,7 @@ class GetRepositoryMapperTests : BaseTest() {
 }
 
 @UsesMocks(PutRepository::class, Mapper::class)
-class PutRepositoryMapperTests : BaseTest() {
+class PutRepositoryMapperTests {
 
   val mocker = Mocker()
 

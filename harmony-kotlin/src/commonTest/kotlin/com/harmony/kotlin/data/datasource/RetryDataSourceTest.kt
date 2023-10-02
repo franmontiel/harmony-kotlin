@@ -8,6 +8,7 @@ import com.harmony.kotlin.common.randomNullable
 import com.harmony.kotlin.common.randomString
 import com.harmony.kotlin.data.query.VoidQuery
 import com.harmony.kotlin.error.DataNotFoundException
+import kotlinx.coroutines.test.runTest
 import org.kodein.mock.Mocker
 import org.kodein.mock.UsesMocks
 import kotlin.test.BeforeTest

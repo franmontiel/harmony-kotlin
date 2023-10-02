@@ -8,6 +8,7 @@ import com.harmony.kotlin.data.mapper.MockMapper
 import com.harmony.kotlin.data.mapper.VoidMapper
 import com.harmony.kotlin.data.mapper.anyVoidMapper
 import com.harmony.kotlin.data.query.anyQuery
+import kotlinx.coroutines.test.runTest
 import org.kodein.mock.Mocker
 import org.kodein.mock.UsesMocks
 import kotlin.test.BeforeTest
@@ -84,7 +85,7 @@ class DataSourceMapperTests : BaseTest() {
 }
 
 @UsesMocks(GetDataSource::class, Mapper::class)
-class GetDataSourceMapperTests : BaseTest() {
+class GetDataSourceMapperTests {
 
   val mocker = Mocker()
 
@@ -116,7 +117,7 @@ class GetDataSourceMapperTests : BaseTest() {
 }
 
 @UsesMocks(PutDataSource::class, Mapper::class)
-class PutDataSourceMapperTests : BaseTest() {
+class PutDataSourceMapperTests {
 
   val mocker = Mocker()
 

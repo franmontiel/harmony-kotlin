@@ -25,6 +25,7 @@ import com.harmony.kotlin.error.DataNotValidException
 import com.harmony.kotlin.error.DataSerializationException
 import com.harmony.kotlin.error.OperationNotSupportedException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

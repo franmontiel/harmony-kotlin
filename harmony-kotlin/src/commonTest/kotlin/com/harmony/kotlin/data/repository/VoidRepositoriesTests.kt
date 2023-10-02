@@ -4,6 +4,7 @@ import com.harmony.kotlin.common.BaseTest
 import com.harmony.kotlin.common.randomInt
 import com.harmony.kotlin.data.operation.anyOperation
 import com.harmony.kotlin.data.query.anyQuery
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
@@ -37,7 +38,7 @@ class VoidRepositoriesTests : BaseTest() {
   }
 }
 
-class VoidGetRepositoriesTests : BaseTest() {
+class VoidGetRepositoriesTests {
 
   @Test
   fun `should throw not supported operation when get function is executed`() = runTest {
@@ -49,7 +50,7 @@ class VoidGetRepositoriesTests : BaseTest() {
   }
 }
 
-class VoidPutRepositoriesTests : BaseTest() {
+class VoidPutRepositoriesTests {
 
   @Test
   fun `should throw not supported operation when put function is executed`() = runTest {
@@ -61,7 +62,7 @@ class VoidPutRepositoriesTests : BaseTest() {
   }
 }
 
-class VoidDeleteRepositoriesTests : BaseTest() {
+class VoidDeleteRepositoriesTests {
 
   @Test
   fun `should throw not supported operation when delete function is executed`() = runTest {
