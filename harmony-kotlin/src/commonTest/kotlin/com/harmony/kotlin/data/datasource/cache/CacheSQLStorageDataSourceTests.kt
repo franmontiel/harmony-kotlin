@@ -11,6 +11,7 @@ import com.harmony.kotlin.data.utilities.anyByteArrayInsertionValue
 import com.harmony.kotlin.data.utilities.anyInsertionValue
 import com.harmony.kotlin.error.DataNotFoundException
 import com.harmony.kotlin.error.QueryNotSupportedException
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertFailsWith

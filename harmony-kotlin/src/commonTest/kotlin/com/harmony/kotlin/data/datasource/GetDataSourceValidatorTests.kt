@@ -7,6 +7,7 @@ import com.harmony.kotlin.data.query.anyQuery
 import com.harmony.kotlin.data.validator.MockValidator
 import com.harmony.kotlin.data.validator.Validator
 import com.harmony.kotlin.error.DataNotValidException
+import kotlinx.coroutines.test.runTest
 import org.kodein.mock.Mocker
 import org.kodein.mock.UsesMocks
 import kotlin.test.BeforeTest

@@ -7,6 +7,7 @@ import com.harmony.kotlin.data.mapper.MockMapper
 import com.harmony.kotlin.data.mapper.anyVoidMapper
 import com.harmony.kotlin.data.query.KeyQuery
 import com.harmony.kotlin.error.DataNotFoundException
+import kotlinx.coroutines.test.runTest
 import org.kodein.mock.Mocker
 import org.kodein.mock.UsesMocks
 import kotlin.test.BeforeTest

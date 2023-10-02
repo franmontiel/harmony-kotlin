@@ -7,6 +7,7 @@ import com.harmony.kotlin.data.validator.vastra.ValidationService
 import com.harmony.kotlin.data.validator.vastra.ValidationServiceManager
 import com.harmony.kotlin.data.validator.vastra.strategies.timestamp.TimestampValidationEntity
 import com.harmony.kotlin.data.validator.vastra.strategies.timestamp.TimestampValidationStrategy
+import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import kotlin.test.Test
 import kotlin.test.assertFalse
