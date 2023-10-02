@@ -1,8 +1,8 @@
 name: Build All Modules
 on:
-  pull_request:
-    branches:
-      - "**"
+#  pull_request:
+#    branches:
+#      - "**"
   push:
     branches:
       - "**"
